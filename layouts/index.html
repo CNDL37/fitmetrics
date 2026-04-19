@@ -157,15 +157,7 @@
             <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">60–70% of max HR · fat-burning, aerobic efficiency</div>
           </div>
         </div>
-        <div style="margin-bottom:6px;font-size:0.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">All Training Zones</div>
-        <div class="hr-zone-bar" id="hr-zone-bar">
-          <div class="hr-seg" style="background:#60a5fa;"></div>
-          <div class="hr-seg" style="background:#34d399;"></div>
-          <div class="hr-seg" style="background:#fbbf24;"></div>
-          <div class="hr-seg" style="background:#f97316;"></div>
-          <div class="hr-seg" style="background:#f87171;"></div>
-        </div>
-        <div class="hr-zone-labels" id="hr-zone-labels"></div>
+        <div style="margin-bottom:10px;font-size:0.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">All Training Zones</div>
         <div class="hr-zone-table" id="hr-zone-table"></div>
         <div class="note" style="margin-top:14px;">Max HR uses the Tanaka formula (men: 208 − 0.7×age) or Gulati formula (women: 206 − 0.88×age). Zone 2 is the most clinically supported zone for metabolic health, fat oxidation, and cardiovascular efficiency.</div>
       </div>
@@ -205,24 +197,13 @@
           <label for="diet-carnivore">Carnivore<em>~0g carbs</em></label>
         </div>
         <div class="macro-bar-wrap">
-          <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:4px;">
-            <span>Protein</span><span id="macro-p-g">—</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);margin-bottom:4px;">
-            <span>Fat</span><span id="macro-f-g">—</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:0.82rem;color:var(--muted);">
-            <span>Carbohydrates</span><span id="macro-c-g">—</span>
-          </div>
+          <div class="macro-row"><span class="macro-row-label"><span class="macro-dot" style="background:#a78bfa;"></span>Protein</span><span class="macro-row-value" id="macro-p-g">—</span></div>
+          <div class="macro-row"><span class="macro-row-label"><span class="macro-dot" style="background:#fbbf24;"></span>Fat</span><span class="macro-row-value" id="macro-f-g">—</span></div>
+          <div class="macro-row"><span class="macro-row-label"><span class="macro-dot" style="background:#4f8ef7;"></span>Carbohydrates</span><span class="macro-row-value" id="macro-c-g">—</span></div>
           <div class="macro-bar" id="macro-bar">
             <div class="seg" id="bar-p" style="background:#a78bfa;width:30%"></div>
             <div class="seg" id="bar-f" style="background:#fbbf24;width:30%"></div>
             <div class="seg" id="bar-c" style="background:#4f8ef7;width:40%"></div>
-          </div>
-          <div class="macro-legend">
-            <span><span class="dot" style="background:#a78bfa;"></span>Protein</span>
-            <span><span class="dot" style="background:#fbbf24;"></span>Fat</span>
-            <span><span class="dot" style="background:#4f8ef7;"></span>Carbs</span>
           </div>
           <div class="note" id="diet-note" style="margin-top:10px;"></div>
         </div>
@@ -261,7 +242,7 @@
       <!-- WEIGHT LOSS PROJECTION CHART -->
       <div class="chart-wrapper">
         <h2>Weight Loss Projection (52 Weeks)</h2>
-        <canvas id="weight-chart" height="280"></canvas>
+        <div class="chart-canvas-wrap"><canvas id="weight-chart"></canvas></div>
         <div class="note" style="margin-top:14px;">Projections simulate week-by-week weight loss with BMR recalculated each week from the new body weight. As weight falls, the gap between fixed intake and BMR narrows, producing a natural plateau curve. Dashed line marks the BMI 18.5 lower boundary. Actual results vary.</div>
       </div>
 

@@ -248,8 +248,7 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
     data: { labels, datasets },
     options: {
       responsive: true,
-      maintainAspectRatio: !isMobile,
-      aspectRatio: 1.6,
+      maintainAspectRatio: false,
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#94a3b8', font: { size: isMobile ? 10 : 12 }, boxWidth: isMobile ? 24 : 40 } },
@@ -338,16 +337,13 @@ function calculate() {
   document.getElementById('hr-max-formula').textContent = hr.formula;
   const zone2 = hr.zones[1];
   document.getElementById('hr-zone2').textContent = `${zone2.low} \u2013 ${zone2.high} bpm`;
-  document.getElementById('hr-zone-labels').innerHTML = hr.zones.map(z =>
-    `<div class="lbl" style="color:${z.color};">${z.name}<br>${z.low}\u2013${z.high}</div>`
-  ).join('');
+  document.getElementById('hr-zone-labels').innerHTML = '';
   document.getElementById('hr-zone-table').innerHTML = hr.zones.map(z =>
-    `<div class="hr-zone-row${z.zone === 2 ? ' zone2-highlight' : ''}">
-      <div class="hr-zone-dot" style="background:${z.color};"></div>
-      <div class="hr-zone-name" style="color:${z.color};">${z.name}</div>
-      <div class="hr-zone-range">${z.low} \u2013 ${z.high} bpm</div>
-      <div class="hr-zone-desc">${z.desc}</div>
-      <div class="hr-zone-pct">${Math.round(z.pctLow*100)}\u2013${Math.round(z.pctHigh*100)}%</div>
+    `<div class="hr-block${z.zone === 2 ? ' zone2-highlight' : ''}" style="--zone-color:${z.color};">
+      <div class="hr-block-name" style="color:${z.color};">${z.name}</div>
+      <div class="hr-block-range">${z.low}\u2013${z.high} bpm</div>
+      <div class="hr-block-pct">${Math.round(z.pctLow*100)}\u2013${Math.round(z.pctHigh*100)}%</div>
+      <div class="hr-block-desc">${z.desc}</div>
     </div>`
   ).join('');
 
