@@ -245,15 +245,12 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
 
   if (weightChart) weightChart.destroy();
   var canvasEl = document.getElementById('weight-chart');
-  var containerW = canvasEl.parentElement.clientWidth || 600;
-  var isMobileH = window.innerWidth < 600;
-  canvasEl.width  = containerW;
-  canvasEl.height = isMobileH ? 200 : 280;
   weightChart = new Chart(canvasEl, {
     type: 'line',
     data: { labels: labels, datasets: datasets },
     options: {
-      responsive: false,
+      responsive: true,
+      maintainAspectRatio: true,
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#94a3b8', font: { size: isMobile ? 10 : 12 }, boxWidth: isMobile ? 24 : 40 } },
