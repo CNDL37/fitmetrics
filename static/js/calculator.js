@@ -8,9 +8,11 @@ function setUnits(u) {
   document.getElementById('height-imperial').style.display = u === 'imperial' ? '' : 'none';
   document.getElementById('height-metric').style.display = u === 'metric' ? '' : 'none';
   document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)';
-  document.getElementById('waist-label').textContent = u === 'imperial'
-    ? 'Waist Circumference (inches) \u2014 optional'
-    : 'Waist Circumference (cm) \u2014 optional';
+  const optSpan = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional</span>';
+  const optBFSpan = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional, for body fat %</span>';
+  document.getElementById('waist-label').innerHTML = (u === 'imperial' ? 'Waist Circumference (inches)' : 'Waist Circumference (cm)') + optSpan;
+  document.getElementById('neck-label').innerHTML  = (u === 'imperial' ? 'Neck Circumference (inches)'  : 'Neck Circumference (cm)')  + optBFSpan;
+  document.getElementById('hip-label').innerHTML   = (u === 'imperial' ? 'Hip Circumference (inches)'   : 'Hip Circumference (cm)')   + optBFSpan;
 }
 
 function getInputs() {
@@ -18,8 +20,10 @@ function getInputs() {
   const sex = document.getElementById('sex').value;
   const weightRaw = parseFloat(document.getElementById('weight').value);
   const waistRaw = parseFloat(document.getElementById('waist').value);
+  const neckRaw  = parseFloat(document.getElementById('neck').value);
+  const hipRaw   = parseFloat(document.getElementById('hip').value);
 
-  let weightKg, heightCm, waistCm;
+  let weightKg, heightCm, waistCm, neckCm, hipCm;
 
   if (units === 'imperial') {
     weightKg = weightRaw * 0.453592;
@@ -27,16 +31,20 @@ function getInputs() {
     const inch = parseFloat(document.getElementById('height-in').value) || 0;
     heightCm = (ft * 12 + inch) * 2.54;
     waistCm = waistRaw ? waistRaw * 2.54 : null;
+    neckCm  = neckRaw  ? neckRaw  * 2.54 : null;
+    hipCm   = hipRaw   ? hipRaw   * 2.54 : null;
   } else {
     weightKg = weightRaw;
     heightCm = parseFloat(document.getElementById('height-cm').value);
-    waistCm = waistRaw || null;
+    waistCm  = waistRaw  || null;
+    neckCm   = neckRaw   || null;
+    hipCm    = hipRaw    || null;
   }
 
   const activityLevel = document.querySelector('input[name="activity"]:checked')?.value || 'sedentary';
   const diet = document.querySelector('input[name="diet"]:checked')?.value || 'balanced';
 
-  return { age, sex, weightKg, heightCm, waistCm, activityLevel, diet };
+  return { age, sex, weightKg, heightCm, waistCm, neckCm, hipCm, activityLevel, diet };
 }
 
 function validate(d) {
@@ -66,6 +74,38 @@ function bmiCategory(bmi) {
 function calcBMR(weightKg, heightCm, age, sex) {
   const base = 10 * weightKg + 6.25 * heightCm - 5 * age;
   return sex === 'male' ? base + 5 : base - 161;
+}
+
+// US Navy body fat method (measurements in cm, converted to inches internally)
+function calcNavyBF(heightCm, waistCm, neckCm, hipCm, sex) {
+  const toIn = (cm) => cm / 2.54;
+  const h = toIn(heightCm);
+  const w = toIn(waistCm);
+  const n = toIn(neckCm);
+  let pct;
+  if (sex === 'male') {
+    pct = 86.010 * Math.log10(w - n) - 70.041 * Math.log10(h) + 36.76;
+  } else {
+    const hip = toIn(hipCm);
+    pct = 163.205 * Math.log10(w + hip - n) - 97.684 * Math.log10(h) - 78.387;
+  }
+  return Math.max(0, +pct.toFixed(1));
+}
+
+function bfCategory(pct, sex) {
+  if (sex === 'male') {
+    if (pct < 6)  return { label: 'Essential Fat', color: '#60a5fa' };
+    if (pct < 14) return { label: 'Athletic',      color: '#34d399' };
+    if (pct < 18) return { label: 'Fitness',       color: '#4f8ef7' };
+    if (pct < 25) return { label: 'Average',       color: '#fbbf24' };
+    return              { label: 'High',           color: '#f87171' };
+  } else {
+    if (pct < 14) return { label: 'Essential Fat', color: '#60a5fa' };
+    if (pct < 21) return { label: 'Athletic',      color: '#34d399' };
+    if (pct < 25) return { label: 'Fitness',       color: '#4f8ef7' };
+    if (pct < 32) return { label: 'Average',       color: '#fbbf24' };
+    return              { label: 'High',           color: '#f87171' };
+  }
 }
 
 function cvRisk(whr) {
@@ -248,6 +288,25 @@ function calculate() {
   const fiber   = fiberG(d.age, d.sex);
   const hr      = calcHeartRates(d.age, d.sex);
 
+  // Body fat (Navy method)
+  const bfCard = document.getElementById('bf-card');
+  const canCalcBF = d.waistCm && d.neckCm && (d.sex === 'male' || d.hipCm);
+  if (canCalcBF) {
+    const bf    = calcNavyBF(d.heightCm, d.waistCm, d.neckCm, d.hipCm, d.sex);
+    const bfCat = bfCategory(bf, d.sex);
+    bfCard.style.display = '';
+    bfCard.style.setProperty('--card-color', bfCat.color);
+    document.getElementById('bf-val').textContent = bf.toFixed(1) + '%';
+    const bfBadge = document.getElementById('bf-cat');
+    bfBadge.textContent = bfCat.label;
+    bfBadge.style.color = bfCat.color;
+    const leanKg = d.weightKg * (1 - bf / 100);
+    document.getElementById('bf-sub').textContent =
+      'Lean mass \u2248 ' + (units === 'imperial' ? (leanKg * 2.205).toFixed(1) + ' lbs' : leanKg.toFixed(1) + ' kg');
+  } else {
+    bfCard.style.display = 'none';
+  }
+
   // Tier 1
   document.getElementById('bmi-val').textContent = bmi.toFixed(1);
   const bmiEl = document.getElementById('bmi-cat');
@@ -316,6 +375,12 @@ function calculate() {
     document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
+
+// Show/hide hip circumference field based on sex selection
+document.getElementById('sex').addEventListener('change', function() {
+  document.getElementById('hip-field').style.display = this.value === 'female' ? '' : 'none';
+  if (this.value !== 'female') document.getElementById('hip').value = '';
+});
 
 document.addEventListener('keydown', (e) => { if (e.key === 'Enter') calculate(); });
 
