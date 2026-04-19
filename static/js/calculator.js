@@ -368,10 +368,12 @@ function calculate() {
 
   document.getElementById('results-panel').classList.add('visible');
   document.getElementById('placeholder-panel').style.display = 'none';
-  buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
-  if (window.innerWidth < 800) {
-    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  requestAnimationFrame(function() {
+    buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
+    if (window.innerWidth < 800) {
+      document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 }
 
 // Show/hide hip circumference field based on sex selection
