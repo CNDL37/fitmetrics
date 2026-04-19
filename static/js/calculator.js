@@ -337,7 +337,6 @@ function calculate() {
   document.getElementById('hr-max-formula').textContent = hr.formula;
   const zone2 = hr.zones[1];
   document.getElementById('hr-zone2').textContent = `${zone2.low} \u2013 ${zone2.high} bpm`;
-  document.getElementById('hr-zone-labels').innerHTML = '';
   document.getElementById('hr-zone-table').innerHTML = hr.zones.map(z =>
     `<div class="hr-block${z.zone === 2 ? ' zone2-highlight' : ''}" style="--zone-color:${z.color};">
       <div class="hr-block-name" style="color:${z.color};">${z.name}</div>
