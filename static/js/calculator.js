@@ -226,26 +226,29 @@ function simulateWeightLoss(startKg, heightCm, age, sex, deficitKcal, numWeeks) 
 }
 
 function buildWeightChart(weightKg, heightCm, age, sex) {
-  const numWeeks = 52;
-  const labels = Array.from({ length: numWeeks + 1 }, (_, i) => i === 0 ? 'Start' : `Wk ${i}`);
-  const gradualWeights = simulateWeightLoss(weightKg, heightCm, age, sex, 200, numWeeks);
-  const steadyWeights  = simulateWeightLoss(weightKg, heightCm, age, sex, 500, numWeeks);
-  const minHealthyKg   = 18.5 * Math.pow(heightCm / 100, 2);
-  const displayFn = units === 'imperial' ? (kg) => +(kg * 2.20462).toFixed(1) : (kg) => +kg.toFixed(1);
-  const unit = units === 'imperial' ? 'lbs' : 'kg';
-  const isMobile = window.innerWidth < 600;
+  var numWeeks = 52;
+  var labels = ['Start'];
+  for (var wi = 1; wi <= numWeeks; wi++) labels.push('Wk ' + wi);
+  var gradualWeights = simulateWeightLoss(weightKg, heightCm, age, sex, 200, numWeeks);
+  var steadyWeights  = simulateWeightLoss(weightKg, heightCm, age, sex, 500, numWeeks);
+  var minHealthyKg   = 18.5 * Math.pow(heightCm / 100, 2);
+  var isImperial = units === 'imperial';
+  var unit = isImperial ? 'lbs' : 'kg';
+  var isMobile = window.innerWidth < 600;
 
-  const datasets = [
-    { label: 'Gradual Loss (\u2013200 kcal/day)', data: gradualWeights.map(displayFn), borderColor: '#34d399', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
-    { label: 'Steady Loss (\u2013500 kcal/day)',  data: steadyWeights.map(displayFn),  borderColor: '#f87171', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
-    { label: 'Healthy Minimum (BMI 18.5)', data: labels.map(() => displayFn(minHealthyKg)), borderColor: '#94a3b8', borderWidth: 1, borderDash: [6,4], pointRadius: 0, tension: 0, fill: false },
+  function toDisplay(kg) { return isImperial ? +(kg * 2.20462).toFixed(1) : +kg.toFixed(1); }
+
+  var datasets = [
+    { label: 'Gradual Loss (-200 kcal/day)', data: gradualWeights.map(toDisplay), borderColor: '#34d399', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
+    { label: 'Steady Loss (-500 kcal/day)',  data: steadyWeights.map(toDisplay),  borderColor: '#f87171', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
+    { label: 'Healthy Minimum (BMI 18.5)',   data: labels.map(function() { return toDisplay(minHealthyKg); }), borderColor: '#94a3b8', borderWidth: 1, borderDash: [6, 4], pointRadius: 0, tension: 0, fill: false }
   ];
 
   if (weightChart) weightChart.destroy();
-  const ctx = document.getElementById('weight-chart').getContext('2d');
-  weightChart = new Chart(ctx, {
+  var canvasEl = document.getElementById('weight-chart');
+  weightChart = new Chart(canvasEl, {
     type: 'line',
-    data: { labels, datasets },
+    data: { labels: labels, datasets: datasets },
     options: {
       responsive: true,
       maintainAspectRatio: true,
@@ -256,12 +259,14 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
         tooltip: {
           backgroundColor: '#1a1d27', borderColor: '#2e3350', borderWidth: 1,
           titleColor: '#e2e8f0', bodyColor: '#94a3b8',
-          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y} ${unit}` }
+          callbacks: {
+            label: function(item) { return ' ' + item.dataset.label + ': ' + item.parsed.y + ' ' + unit; }
+          }
         }
       },
       scales: {
         x: { ticks: { color: '#94a3b8', maxTicksLimit: isMobile ? 7 : 14, font: { size: isMobile ? 9 : 11 } }, grid: { color: 'rgba(46,51,80,0.5)' } },
-        y: { ticks: { color: '#94a3b8', font: { size: isMobile ? 9 : 11 }, callback: (v) => `${v} ${unit}` }, grid: { color: 'rgba(46,51,80,0.5)' } }
+        y: { ticks: { color: '#94a3b8', font: { size: isMobile ? 9 : 11 }, callback: function(v) { return v + ' ' + unit; } }, grid: { color: 'rgba(46,51,80,0.5)' } }
       }
     }
   });
@@ -369,10 +374,12 @@ function calculate() {
   document.getElementById('results-panel').classList.add('visible');
   document.getElementById('placeholder-panel').style.display = 'none';
   requestAnimationFrame(function() {
-    buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
-    if (window.innerWidth < 800) {
-      document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    requestAnimationFrame(function() {
+      buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
+      if (window.innerWidth < 800) {
+        document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
 }
 
