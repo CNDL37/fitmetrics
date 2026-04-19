@@ -235,7 +235,6 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
   var isImperial = units === 'imperial';
   var unit = isImperial ? 'lbs' : 'kg';
   var isMobile = window.innerWidth < 600;
-
   function toDisplay(kg) { return isImperial ? +(kg * 2.20462).toFixed(1) : +kg.toFixed(1); }
 
   var datasets = [
@@ -246,11 +245,15 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
 
   if (weightChart) weightChart.destroy();
   var canvasEl = document.getElementById('weight-chart');
+  var containerW = canvasEl.parentElement.clientWidth || 600;
+  var isMobileH = window.innerWidth < 600;
+  canvasEl.width  = containerW;
+  canvasEl.height = isMobileH ? 200 : 280;
   weightChart = new Chart(canvasEl, {
     type: 'line',
     data: { labels: labels, datasets: datasets },
     options: {
-      responsive: true,
+      responsive: false,
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#94a3b8', font: { size: isMobile ? 10 : 12 }, boxWidth: isMobile ? 24 : 40 } },
@@ -369,12 +372,12 @@ function calculate() {
   document.getElementById('steps-7500').textContent  = `~${stepCalories(7500,  d.weightKg, d.age)} kcal`;
   document.getElementById('steps-10000').textContent = `~${stepCalories(10000, d.weightKg, d.age)} kcal`;
 
-  buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
   document.getElementById('results-panel').classList.add('visible');
   document.getElementById('placeholder-panel').style.display = 'none';
   if (window.innerWidth < 800) {
     document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  setTimeout(function() { buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex); }, 100);
 }
 
 // Show/hide hip circumference field based on sex selection
