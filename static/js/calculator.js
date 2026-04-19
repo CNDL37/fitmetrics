@@ -338,12 +338,12 @@ function calculate() {
   const zone2 = hr.zones[1];
   document.getElementById('hr-zone2').textContent = `${zone2.low} \u2013 ${zone2.high} bpm`;
   document.getElementById('hr-zone-table').innerHTML = hr.zones.map(z =>
-    `<div class="hr-block${z.zone === 2 ? ' zone2-highlight' : ''}" style="--zone-color:${z.color};">
-      <div class="hr-block-name" style="color:${z.color};">${z.name}</div>
-      <div class="hr-block-range">${z.low}\u2013${z.high} bpm</div>
-      <div class="hr-block-pct">${Math.round(z.pctLow*100)}\u2013${Math.round(z.pctHigh*100)}%</div>
-      <div class="hr-block-desc">${z.desc}</div>
-    </div>`
+    '<div class="hr-block' + (z.zone === 2 ? ' zone2-highlight' : '') + '" style="border-top-color:' + z.color + ';">' +
+      '<div class="hr-block-name" style="color:' + z.color + ';">' + z.name + '</div>' +
+      '<div class="hr-block-range">' + z.low + '\u2013' + z.high + ' bpm</div>' +
+      '<div class="hr-block-pct">' + Math.round(z.pctLow * 100) + '\u2013' + Math.round(z.pctHigh * 100) + '%</div>' +
+      '<div class="hr-block-desc">' + z.desc + '</div>' +
+    '</div>'
   ).join('');
 
   // Tier 2
