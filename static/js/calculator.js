@@ -248,7 +248,8 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
     data: { labels, datasets },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
+      aspectRatio: isMobile ? 1.4 : 2.2,
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#94a3b8', font: { size: isMobile ? 10 : 12 }, boxWidth: isMobile ? 24 : 40 } },
@@ -365,10 +366,9 @@ function calculate() {
   document.getElementById('steps-7500').textContent  = `~${stepCalories(7500,  d.weightKg, d.age)} kcal`;
   document.getElementById('steps-10000').textContent = `~${stepCalories(10000, d.weightKg, d.age)} kcal`;
 
-  buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
-
   document.getElementById('results-panel').classList.add('visible');
   document.getElementById('placeholder-panel').style.display = 'none';
+  buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex);
   if (window.innerWidth < 800) {
     document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
