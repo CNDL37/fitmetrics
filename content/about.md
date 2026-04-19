@@ -9,6 +9,72 @@ We don't sell supplements, coaching programs, or meal plans. The goal is simply 
 
 ---
 
+## Body Fat Percentage — U.S. Navy Circumference Method
+
+Body fat percentage is a more informative measure of body composition than weight or BMI alone, because it distinguishes metabolically active lean tissue (muscle, bone, organs) from adipose tissue. The U.S. Navy circumference method estimates body fat from a small set of simple tape measurements and has been validated against more resource-intensive reference methods.
+
+### The Formulas
+
+**Men** (requires height, waist, neck):
+
+> %BF = 86.010 × log₁₀(waist − neck) − 70.041 × log₁₀(height) + 36.76
+
+**Women** (requires height, waist, neck, hip):
+
+> %BF = 163.205 × log₁₀(waist + hip − neck) − 97.684 × log₁₀(height) − 78.387
+
+All measurements are in inches. Waist is measured at the narrowest point (navel level for men, narrowest circumference for women); neck is measured just below the larynx; hip is measured at the widest point of the buttocks (women only).
+
+### Why the Navy Method?
+
+The Navy method was developed by Hodgdon and Beckett (1984) at the Naval Health Research Center as a practical field alternative to underwater weighing (hydrostatic densitometry), which was the gold-standard method at the time but requires specialized equipment and facilities.
+
+<div class="evidence-box"><strong>Validation:</strong> Hodgdon & Beckett (1984) derived the circumference-based equations by regressing tape measurements against percent body fat determined by hydrostatic weighing in a large sample of Navy personnel. The method explained approximately 85–90% of the variance in measured body fat in the development sample.</div>
+
+### Accuracy and Limitations
+
+The Navy method is a **field estimation tool**, not a clinical measurement. Its accuracy compared to reference methods has been studied extensively:
+
+<div class="evidence-box"><strong>Accuracy data:</strong> Friedl et al. (1992) evaluated the Navy method against dual-energy X-ray absorptiometry (DEXA) and hydrostatic weighing in military populations. The standard error of estimate was approximately ±3–4% body fat — acceptable for population screening and self-monitoring, but not for clinical precision. Similar findings have been reported by Carey (2009) and Peterson et al. (2003).</div>
+
+**Known sources of error:**
+- **Measurement technique** is the largest variable. Waist, neck, and hip circumferences must be measured consistently — small errors in placement compound in the logarithmic formula. FitMetrics displays results to one decimal place, but the practical precision of self-measurement is closer to ±1–2%.
+- **Body shape variation.** People with the same body fat percentage can have different circumference distributions, particularly across ethnicities. The equations were derived primarily from military populations and may systematically over- or under-estimate body fat in other groups.
+- **Sex differences.** The separate male and female equations account for different fat distribution patterns (android vs. gynoid), but within-sex variation in fat distribution still limits precision.
+- **Age.** Older adults tend to have greater central fat deposition at a given total body fat percentage, which can cause the method to overestimate body fat in this population.
+
+### How It Compares to Other Methods
+
+| Method | Accuracy (±% BF) | Equipment needed | Cost |
+|--------|-----------------|-----------------|------|
+| DEXA scan | ±1–2% | Clinical scanner | High |
+| Hydrostatic weighing | ±1–3% | Water tank, lab | High |
+| Air displacement (Bod Pod) | ±2–3% | Specialized pod | High |
+| Skinfold calipers | ±3–5% | Calipers, training | Low |
+| **Navy circumference** | **±3–4%** | **Tape measure** | **Free** |
+| BIA (consumer scales) | ±4–8% | Smart scale | Low–medium |
+| BMI-based estimates | ±5–8% | None | Free |
+
+The Navy method compares favorably to other low-cost approaches — particularly consumer bioelectrical impedance scales, whose accuracy is highly sensitive to hydration status and time of day — while requiring nothing more than a flexible measuring tape.
+
+### Body Fat Classification
+
+FitMetrics uses the **American Council on Exercise (ACE)** body fat classification system:
+
+| Category | Men | Women |
+|----------|-----|-------|
+| Essential Fat | <6% | <14% |
+| Athletic | 6–13% | 14–20% |
+| Fitness | 14–17% | 21–24% |
+| Average | 18–24% | 25–31% |
+| High | ≥25% | ≥32% |
+
+These thresholds reflect population norms and general health risk associations rather than absolute clinical cutoffs. "Essential fat" represents the minimum required for physiological function (organ protection, hormone production, nerve insulation). "Athletic" reflects the range typical of competitive athletes. Health risks associated with excess body fat include insulin resistance, dyslipidemia, cardiovascular disease, and certain cancers — independent of BMI.
+
+<div class="evidence-box"><strong>Note:</strong> The Navy method requires waist and neck circumference for men, and waist, neck, and hip circumference for women. If these optional measurements are not entered in the calculator, the body fat card will not appear. Hip circumference is only shown in the input form when Female is selected as biological sex.</div>
+
+---
+
 ## Body Mass Index (BMI)
 
 BMI is calculated as weight (kg) ÷ height (m)². It is a population-level screening tool developed in the 19th century and validated repeatedly as a predictor of metabolic risk across large cohorts.
