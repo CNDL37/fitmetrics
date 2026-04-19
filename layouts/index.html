@@ -116,19 +116,19 @@
           </div>
           <div class="result-card wide" id="cv-risk-card" style="--card-color: #fbbf24;">
             <div class="label">Cardiovascular Risk — Waist : Height Ratio</div>
-            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px;">
+            <div class="cv-risk-inner">
               <div>
                 <div class="value" id="whr-val">—</div>
                 <div id="cv-badge-wrap"></div>
               </div>
-              <div style="flex:1;min-width:180px;">
+              <div class="cv-risk-bar-wrap">
                 <div class="risk-bar">
                   <div class="seg" style="background:#34d399;"></div>
                   <div class="seg" style="background:#fbbf24;"></div>
                   <div class="seg" style="background:#f87171;"></div>
                   <div class="seg" style="background:#ef4444;"></div>
                 </div>
-                <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);">
+                <div class="risk-bar-labels">
                   <span>Low &lt;0.40</span><span>Mod 0.40–0.50</span><span>High 0.51–0.60</span><span>Very High &gt;0.60</span>
                 </div>
                 <div class="note" style="margin-top:10px;" id="cv-note">—</div>

@@ -233,6 +233,7 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
   const minHealthyKg   = 18.5 * Math.pow(heightCm / 100, 2);
   const displayFn = units === 'imperial' ? (kg) => +(kg * 2.20462).toFixed(1) : (kg) => +kg.toFixed(1);
   const unit = units === 'imperial' ? 'lbs' : 'kg';
+  const isMobile = window.innerWidth < 600;
 
   const datasets = [
     { label: 'Gradual Loss (\u2013200 kcal/day)', data: gradualWeights.map(displayFn), borderColor: '#34d399', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
@@ -247,9 +248,11 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
     data: { labels, datasets },
     options: {
       responsive: true,
+      maintainAspectRatio: !isMobile,
+      aspectRatio: 1.6,
       interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { labels: { color: '#94a3b8', font: { size: 12 } } },
+        legend: { labels: { color: '#94a3b8', font: { size: isMobile ? 10 : 12 }, boxWidth: isMobile ? 24 : 40 } },
         tooltip: {
           backgroundColor: '#1a1d27', borderColor: '#2e3350', borderWidth: 1,
           titleColor: '#e2e8f0', bodyColor: '#94a3b8',
@@ -257,8 +260,8 @@ function buildWeightChart(weightKg, heightCm, age, sex) {
         }
       },
       scales: {
-        x: { ticks: { color: '#94a3b8', maxTicksLimit: 14, font: { size: 11 } }, grid: { color: 'rgba(46,51,80,0.5)' } },
-        y: { ticks: { color: '#94a3b8', font: { size: 11 }, callback: (v) => `${v} ${unit}` }, grid: { color: 'rgba(46,51,80,0.5)' } }
+        x: { ticks: { color: '#94a3b8', maxTicksLimit: isMobile ? 7 : 14, font: { size: isMobile ? 9 : 11 } }, grid: { color: 'rgba(46,51,80,0.5)' } },
+        y: { ticks: { color: '#94a3b8', font: { size: isMobile ? 9 : 11 }, callback: (v) => `${v} ${unit}` }, grid: { color: 'rgba(46,51,80,0.5)' } }
       }
     }
   });

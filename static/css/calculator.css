@@ -255,6 +255,10 @@
 .deficit-card .small { font-size: 0.78rem; color: var(--muted); }
 
 .diet-preset-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+@media (max-width: 480px) {
+  .diet-preset-group { display: grid; grid-template-columns: 1fr 1fr; }
+  .diet-preset-group label { justify-content: center; }
+}
 .diet-preset-group input[type="radio"] { display: none; }
 .diet-preset-group label {
   display: inline-flex;
@@ -301,7 +305,15 @@
   padding: 24px;
   box-shadow: var(--shadow);
   margin-top: 16px;
+  overflow: hidden;
 }
+@media (max-width: 580px) {
+  .chart-wrapper { padding: 16px 12px; }
+  .chart-wrapper canvas { height: 220px !important; }
+}
+
+.cv-risk-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.cv-risk-bar-wrap { flex: 1; min-width: 160px; }
 .chart-wrapper h2 {
   font-size: 1rem;
   font-weight: 600;
@@ -329,6 +341,9 @@
 
 .risk-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin: 8px 0; }
 .risk-bar .seg { flex: 1; }
+.risk-bar-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); flex-wrap: wrap; gap: 2px; }
+.risk-bar-labels span { white-space: nowrap; }
+@media (max-width: 480px) { .risk-bar-labels { font-size: 0.62rem; } }
 
 .protein-tiers { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 .protein-tier {
@@ -380,6 +395,15 @@
 .hr-zone-range { color: var(--accent); font-weight: 600; width: 100px; flex-shrink: 0; }
 .hr-zone-desc { color: var(--muted); flex: 1; }
 .hr-zone-pct { color: var(--muted); font-size: 0.75rem; width: 56px; text-align: right; flex-shrink: 0; }
+
+@media (max-width: 580px) {
+  .hr-zone-labels .lbl { font-size: 0.58rem; }
+  .hr-zone-row { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .hr-zone-name { width: auto; }
+  .hr-zone-range { width: auto; flex: 1; }
+  .hr-zone-desc { width: 100%; order: 4; font-size: 0.75rem; padding-top: 2px; }
+  .hr-zone-pct { order: 3; width: auto; }
+}
 
 #results-panel { display: none; }
 #results-panel.visible { display: block; }
