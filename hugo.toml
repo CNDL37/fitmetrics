@@ -1,0 +1,26 @@
+baseURL = "https://fitmetrics.net/"
+languageCode = "en-us"
+title = "FitMetrics"
+
+[params]
+  description = "Evidence-based health and fitness calculators — BMR, macros, heart rate zones, and more."
+  author = "FitMetrics"
+
+[menu]
+  [[menu.main]]
+    name = "Calculator"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 3
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

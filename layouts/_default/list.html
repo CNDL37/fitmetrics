@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="fm-page-title mb-1">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}<p class="fm-page-subtitle mb-3">{{ . }}</p>{{ end }}
+      <hr class="fm-divider mb-5">
+
+      {{ if .Pages }}
+      <div class="fm-post-list">
+        {{ range .Pages.ByDate.Reverse }}
+        <article class="fm-post-card mb-4">
+          <div class="fm-post-meta mb-1">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ with .Params.tags }}
+              {{ range . }}
+              <span class="fm-tag">{{ . }}</span>
+              {{ end }}
+            {{ end }}
+          </div>
+          <h2 class="fm-post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          {{ with .Params.summary }}<p class="fm-post-excerpt">{{ . }}</p>{{ end }}
+          <a href="{{ .RelPermalink }}" class="fm-read-more">Read article →</a>
+        </article>
+        {{ end }}
+      </div>
+      {{ else }}
+      <p class="text-muted">No posts yet — check back soon.</p>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
