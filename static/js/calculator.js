@@ -115,23 +115,38 @@ function cvRisk(whr) {
   return { label: 'Very High', cls: 'very-high', note: 'Significantly elevated cardiovascular risk. Consultation with a healthcare provider is recommended.' };
 }
 
-function proteinTiers(weightKg, activityLevel, age) {
-  const older     = age >= 60;
-  const minG      = Math.round(1.0 * weightKg);
-  const olderG    = Math.round(1.4 * weightKg);
-  const moderateG = Math.round(1.2 * weightKg);
-  const activeG   = Math.round(1.6 * weightKg);
-  const athleteG  = Math.round(2.0 * weightKg);
+function idealBodyWeightKg(heightCm, sex) {
+  const heightIn = heightCm / 2.54;
+  const base = sex === 'male' ? 50 : 45.5;
+  return Math.max(base, base + 2.3 * (heightIn - 60));
+}
 
+function proteinWeightKg(actualKg, heightCm, sex) {
+  const ibw = idealBodyWeightKg(heightCm, sex);
+  if (actualKg <= ibw) return { kg: actualKg, usedIBW: false };
+  return { kg: ibw, usedIBW: true, ibwKg: Math.round(ibw) };
+}
+
+function proteinTiers(weightKg, activityLevel, age, heightCm, sex) {
+  const pw = proteinWeightKg(weightKg, heightCm, sex);
+  const w = pw.kg;
+  const older     = age >= 60;
+  const minG      = Math.round(1.0 * w);
+  const olderG    = Math.round(1.4 * w);
+  const moderateG = Math.round(1.2 * w);
+  const activeG   = Math.round(1.6 * w);
+  const athleteG  = Math.round(2.0 * w);
+
+  const ibwNote = pw.usedIBW ? ` (based on ideal body weight ${pw.ibwKg} kg)` : '';
   const tiers = [
-    { label: `Baseline (1.0g/kg${older ? ' \u2014 elevated for age 60+' : ''})`, value: `${minG}g / day` }
+    { label: `Baseline (1.0g/kg${older ? ' \u2014 elevated for age 60+' : ''}${ibwNote})`, value: `${minG}g / day` }
   ];
   if (older)
-    tiers.push({ label: 'Sarcopenia prevention, age 60+ (1.4g/kg)', value: `${olderG}g / day` });
+    tiers.push({ label: 'Sarcopenia prevention, age 60+ (1.4g/kg' + (pw.usedIBW ? ', IBW' : '') + ')', value: `${olderG}g / day` });
   if (activityLevel === 'active')
-    tiers.push({ label: 'Recreationally active (1.2\u20131.6g/kg)', value: `${moderateG}\u2013${activeG}g / day` });
+    tiers.push({ label: 'Recreationally active (1.2\u20131.6g/kg' + (pw.usedIBW ? ', IBW' : '') + ')', value: `${moderateG}\u2013${activeG}g / day` });
   if (activityLevel === 'athlete')
-    tiers.push({ label: 'Athlete / strength training (1.6\u20132.0g/kg)', value: `${activeG}\u2013${athleteG}g / day` });
+    tiers.push({ label: 'Athlete / strength training (1.6\u20132.0g/kg' + (pw.usedIBW ? ', IBW' : '') + ')', value: `${activeG}\u2013${athleteG}g / day` });
   return tiers;
 }
 
@@ -143,16 +158,18 @@ const DIET_NOTES = {
   'carnivore':     'Zero carbohydrates. Protein elevated to 2.0g/kg; fat supplies remaining calories.',
 };
 
-function macros(bmr, weightKg, activityLevel, diet) {
+function macros(bmr, weightKg, activityLevel, diet, heightCm, sex) {
+  const pw = proteinWeightKg(weightKg, heightCm, sex);
+  const w = pw.kg;
   let proteinG;
-  if (activityLevel === 'athlete')     proteinG = Math.round(1.8 * weightKg);
-  else if (activityLevel === 'active') proteinG = Math.round(1.4 * weightKg);
-  else                                 proteinG = Math.round(1.0 * weightKg);
+  if (activityLevel === 'athlete')     proteinG = Math.round(1.8 * w);
+  else if (activityLevel === 'active') proteinG = Math.round(1.4 * w);
+  else                                 proteinG = Math.round(1.0 * w);
 
   let carbG, fatG;
 
   if (diet === 'carnivore') {
-    proteinG = Math.round(2.0 * weightKg);
+    proteinG = Math.round(2.0 * w);
     carbG = 0;
     fatG = Math.max(10, Math.round((bmr - proteinG * 4) / 9));
   } else if (diet === 'keto') {
@@ -288,8 +305,8 @@ function calculate() {
   const bmi    = calcBMI(d.weightKg, d.heightCm);
   const bmiCat = bmiCategory(bmi);
   const bmr    = calcBMR(d.weightKg, d.heightCm, d.age, d.sex);
-  const protein = proteinTiers(d.weightKg, d.activityLevel, d.age);
-  const mac     = macros(bmr, d.weightKg, d.activityLevel, d.diet);
+  const protein = proteinTiers(d.weightKg, d.activityLevel, d.age, d.heightCm, d.sex);
+  const mac     = macros(bmr, d.weightKg, d.activityLevel, d.diet, d.heightCm, d.sex);
   const water   = waterMl(d.weightKg);
   const fiber   = fiberG(d.age, d.sex);
   const hr      = calcHeartRates(d.age, d.sex);
