@@ -406,5 +406,35 @@
   .hr-block-range { font-size: 0.72rem; }
 }
 
+.body-type-inner {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.body-type-left { min-width: 160px; }
+.body-type-value {
+  font-size: 1.3rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 6px !important;
+}
+.body-type-right { flex: 1; min-width: 180px; }
+.body-type-description {
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.body-type-action {
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  border-left: 3px solid var(--card-color, var(--accent));
+  line-height: 1.5;
+}
+
 #results-panel { display: none; }
 #results-panel.visible { display: block; }

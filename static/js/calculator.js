@@ -115,6 +115,76 @@ function cvRisk(whr) {
   return { label: 'Very High', cls: 'very-high', note: 'Significantly elevated cardiovascular risk. Consultation with a healthcare provider is recommended.' };
 }
 
+// IFM Body Composition Flow Diagram classifier
+// waistCm required; hipCm and bfPct may be null
+function bodyTypeClassify(bmi, waistCm, hipCm, bfPct, sex) {
+  const bmiIncreased = bmi >= 25;
+  const wcEl = sex === 'male' ? waistCm >= 94 : waistCm >= 80;
+  const whr = hipCm ? waistCm / hipCm : null;
+  const whrEl = whr !== null ? (sex === 'male' ? whr > 0.90 : whr > 0.85) : null;
+  const bfThresh = sex === 'male' ? 25 : 32;
+  const bfEl = bfPct !== null ? bfPct >= bfThresh : null;
+
+  if (!bmiIncreased) {
+    const centralAdiposity = wcEl || whrEl === true;
+    if (!centralAdiposity) {
+      if (bfEl === false) {
+        return { type: 'ideal', label: 'Ideal Body Composition', color: '#34d399',
+          description: 'BMI, waist circumference, and body fat % are all within healthy ranges — the target pattern for long-term metabolic health.',
+          action: 'Maintain current habits: resistance training, adequate protein, quality sleep, and balanced nutrition.' };
+      } else if (bfEl === true) {
+        return { type: 'skinny-fat', label: 'Skinny Fat (MONW)', color: '#f97316',
+          description: 'Metabolically Obese Normal Weight — normal BMI with elevated body fat %. Carries significant metabolic and cardiovascular risk despite appearing lean.',
+          action: 'Prioritize resistance training to build lean mass. Review carbohydrate quality and total caloric intake. Regular metabolic screening recommended.' };
+      } else {
+        return { type: 'likely-ideal', label: 'Likely Ideal', color: '#34d399',
+          description: 'BMI and waist circumference are within healthy ranges. Provide neck circumference to calculate body fat % and confirm classification.',
+          action: 'Enter neck circumference to complete your body fat % assessment.' };
+      }
+    } else {
+      return { type: 'skinny-fat', label: 'Skinny Fat (MONW)', color: '#f97316',
+        description: 'Normal BMI with elevated central adiposity (waist or WHR). Excess visceral fat accumulation despite normal body weight — a high-risk metabolic pattern.',
+        action: 'Prioritize Zone 2 aerobic exercise, a lower-glycemic diet, stress reduction, and sleep optimization.' };
+    }
+  } else {
+    // BMI ≥ 25
+    if (!wcEl) {
+      if (whrEl === true) {
+        return { type: 'met-obese', label: 'Metabolically Obese (Over-VAT)', color: '#ef4444',
+          description: 'Elevated BMI and WHR with a proportionate waist. Preferential visceral fat distribution carries high cardiometabolic risk despite a lower-than-expected waist circumference.',
+          action: 'Prioritize aerobic activity, Mediterranean-style diet, sleep optimization, and stress reduction. Consider metabolic screening.' };
+      } else {
+        if (bfEl !== true) {
+          return { type: 'athlete', label: 'High Muscle / Athlete', color: '#4f8ef7',
+            description: 'Elevated BMI with low-normal waist and WHR — likely reflects high lean mass rather than excess fat. Common in muscular or athletic individuals.',
+            action: 'Continue resistance and aerobic training. Track body fat % directly rather than relying on BMI alone.' };
+        } else {
+          return { type: 'gynoid', label: 'Gynoid / Peripheral Fat (Over-SAT)', color: '#a78bfa',
+            description: 'Elevated BMI and body fat % with fat stored peripherally (hips and thighs). Lower cardiovascular risk than android pattern, but excess subcutaneous fat warrants intervention.',
+            action: 'Combine resistance training with a moderate caloric deficit (−300–500 kcal/day). Ensure adequate protein to preserve lean mass.' };
+        }
+      }
+    } else {
+      // WC elevated
+      if (whrEl === true) {
+        return { type: 'android', label: 'Android Obesity', color: '#dc2626',
+          description: 'Elevated BMI, waist circumference, and WHR — central/visceral obesity. This pattern carries the highest cardiometabolic risk and is strongly associated with insulin resistance, T2D, and cardiovascular disease.',
+          action: 'Medical consultation recommended. Prioritize aerobic exercise, reduced refined carbohydrates, stress management, and sleep quality. Visceral fat reduction is the primary target.' };
+      } else {
+        if (bfEl !== true) {
+          return { type: 'large-frame', label: 'High Muscle / Large Frame', color: '#60a5fa',
+            description: 'Elevated BMI and waist circumference without elevated WHR. May reflect a large frame or high lean mass. Add hip circumference and neck measurement for a complete assessment.',
+            action: 'Calculate body fat % to confirm whether the elevated BMI reflects lean mass or fat. If fat is elevated, consider a moderate caloric deficit.' };
+        } else {
+          return { type: 'gynoid', label: 'Gynoid / Peripheral Fat (Over-SAT)', color: '#a78bfa',
+            description: 'Elevated BMI, waist, and body fat % distributed peripherally. Subcutaneous fat pattern carries lower cardiovascular risk than visceral obesity but still warrants intervention.',
+            action: 'Combine resistance training with a moderate caloric deficit. Focus on lower-body compound movements and adequate protein intake.' };
+        }
+      }
+    }
+  }
+}
+
 function idealBodyWeightKg(heightCm, sex) {
   const heightIn = heightCm / 2.54;
   const base = sex === 'male' ? 50 : 45.5;
@@ -312,18 +382,19 @@ function calculate() {
   const hr      = calcHeartRates(d.age, d.sex);
 
   // Body fat (Navy method)
+  let bfPct = null;
   const bfCard = document.getElementById('bf-card');
   const canCalcBF = d.waistCm && d.neckCm && (d.sex === 'male' || d.hipCm);
   if (canCalcBF) {
-    const bf    = calcNavyBF(d.heightCm, d.waistCm, d.neckCm, d.hipCm, d.sex);
-    const bfCat = bfCategory(bf, d.sex);
+    bfPct = calcNavyBF(d.heightCm, d.waistCm, d.neckCm, d.hipCm, d.sex);
+    const bfCat = bfCategory(bfPct, d.sex);
     bfCard.style.display = '';
     bfCard.style.setProperty('--card-color', bfCat.color);
-    document.getElementById('bf-val').textContent = bf.toFixed(1) + '%';
+    document.getElementById('bf-val').textContent = bfPct.toFixed(1) + '%';
     const bfBadge = document.getElementById('bf-cat');
     bfBadge.textContent = bfCat.label;
     bfBadge.style.color = bfCat.color;
-    const leanKg = d.weightKg * (1 - bf / 100);
+    const leanKg = d.weightKg * (1 - bfPct / 100);
     document.getElementById('bf-sub').textContent =
       'Lean mass \u2248 ' + (units === 'imperial' ? (leanKg * 2.205).toFixed(1) + ' lbs' : leanKg.toFixed(1) + ' kg');
   } else {
@@ -338,6 +409,7 @@ function calculate() {
   document.getElementById('bmr-val').textContent = Math.round(bmr).toLocaleString();
 
   const cvCard = document.getElementById('cv-risk-card');
+  const bodyTypeCard = document.getElementById('body-type-card');
   if (d.waistCm) {
     const whr = d.waistCm / d.heightCm;
     const cv  = cvRisk(whr);
@@ -345,8 +417,19 @@ function calculate() {
     document.getElementById('whr-val').textContent = whr.toFixed(3);
     document.getElementById('cv-badge-wrap').innerHTML = `<span class="cv-risk-badge ${cv.cls}">${cv.label}</span>`;
     document.getElementById('cv-note').textContent = cv.note;
+
+    const bt = bodyTypeClassify(bmi, d.waistCm, d.hipCm, bfPct, d.sex);
+    bodyTypeCard.style.display = '';
+    bodyTypeCard.style.setProperty('--card-color', bt.color);
+    const btLabel = document.getElementById('body-type-label');
+    btLabel.textContent = bt.label;
+    btLabel.style.color = bt.color;
+    document.getElementById('body-type-badge').style.color = bt.color;
+    document.getElementById('body-type-description').textContent = bt.description;
+    document.getElementById('body-type-action').textContent = bt.action;
   } else {
     cvCard.style.display = 'none';
+    bodyTypeCard.style.display = 'none';
   }
 
   document.getElementById('protein-tiers').innerHTML = protein.map(t =>

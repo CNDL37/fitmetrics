@@ -135,6 +135,19 @@
               </div>
             </div>
           </div>
+          <div class="result-card wide" id="body-type-card" style="--card-color: #34d399; display:none;">
+            <div class="label">Body Composition Type <span style="font-size:0.65rem;font-weight:400;">(IFM Classification)</span></div>
+            <div class="body-type-inner">
+              <div class="body-type-left">
+                <div class="value body-type-value" id="body-type-label">—</div>
+                <span class="badge" id="body-type-badge">IFM Pattern</span>
+              </div>
+              <div class="body-type-right">
+                <div id="body-type-description" class="body-type-description"></div>
+                <div id="body-type-action" class="body-type-action"></div>
+              </div>
+            </div>
+          </div>
           <div class="result-card wide" style="--card-color: #a78bfa;">
             <div class="label">Protein Intake Targets</div>
             <div class="protein-tiers" id="protein-tiers"></div>
@@ -263,5 +276,5 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script src="/js/calculator.js?v=9" data-cfasync="false"></script>
+<script src="/js/calculator.js?v=10" data-cfasync="false"></script>
 {{ end }}
