@@ -9,10 +9,11 @@ function setUnits(u) {
   document.getElementById('height-metric').style.display = u === 'metric' ? '' : 'none';
   document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)';
   const optSpan = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional</span>';
-  const optBFSpan = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional, for body fat %</span>';
+  const optBFSpan  = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional, for body fat %</span>';
+  const optHipSpan = ' <span style="font-weight:400;color:var(--muted);">\u2014 optional, for body fat % &amp; body type (WHR)</span>';
   document.getElementById('waist-label').innerHTML = (u === 'imperial' ? 'Waist Circumference (inches)' : 'Waist Circumference (cm)') + optSpan;
   document.getElementById('neck-label').innerHTML  = (u === 'imperial' ? 'Neck Circumference (inches)'  : 'Neck Circumference (cm)')  + optBFSpan;
-  document.getElementById('hip-label').innerHTML   = (u === 'imperial' ? 'Hip Circumference (inches)'   : 'Hip Circumference (cm)')   + optBFSpan;
+  document.getElementById('hip-label').innerHTML   = (u === 'imperial' ? 'Hip Circumference (inches)'   : 'Hip Circumference (cm)')   + optHipSpan;
 }
 
 function getInputs() {
@@ -477,10 +478,10 @@ function calculate() {
   setTimeout(function() { buildWeightChart(d.weightKg, d.heightCm, d.age, d.sex); }, 100);
 }
 
-// Show/hide hip circumference field based on sex selection
+// Show hip circumference for both sexes (used for WHR body-type classification and Navy BF% for women)
 document.getElementById('sex').addEventListener('change', function() {
-  document.getElementById('hip-field').style.display = this.value === 'female' ? '' : 'none';
-  if (this.value !== 'female') document.getElementById('hip').value = '';
+  document.getElementById('hip-field').style.display = this.value ? '' : 'none';
+  if (!this.value) document.getElementById('hip').value = '';
 });
 
 document.addEventListener('keydown', (e) => { if (e.key === 'Enter') calculate(); });

@@ -74,7 +74,7 @@
     </div>
 
     <div class="field" id="hip-field" style="display:none;">
-      <label id="hip-label">Hip Circumference (inches) <span style="font-weight:400;color:var(--muted);">— optional, for body fat %</span></label>
+      <label id="hip-label">Hip Circumference (inches) <span style="font-weight:400;color:var(--muted);">— optional, for body fat % &amp; body type (WHR)</span></label>
       <input type="number" id="hip" min="20" max="80" placeholder="e.g. 40 (optional)" step="0.5">
     </div>
 
@@ -276,5 +276,5 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script src="/js/calculator.js?v=10" data-cfasync="false"></script>
+<script src="/js/calculator.js?v=11" data-cfasync="false"></script>
 {{ end }}
