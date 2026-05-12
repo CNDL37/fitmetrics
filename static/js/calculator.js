@@ -109,10 +109,12 @@ function bfCategory(pct, sex) {
   }
 }
 
-function cvRisk(whr) {
-  if (whr < 0.40) return { label: 'Low', cls: 'low', note: 'Waist-to-height ratio is in the low-risk range.' };
-  if (whr <= 0.50) return { label: 'Healthy / Moderate', cls: 'moderate', note: 'Your ratio is within the healthy range. Maintain current habits.' };
-  if (whr <= 0.60) return { label: 'High', cls: 'high', note: 'Elevated central adiposity. Consider reducing visceral fat through diet and aerobic activity.' };
+// WHtR = waist-to-HEIGHT ratio (not waist-to-hip). Thresholds: <0.40 low, 0.40–0.50 moderate, 0.51–0.60 high, >0.60 very high.
+// Note: waist-to-HIP ratio (WHR) is used separately inside bodyTypeClassify() for IFM body composition classification.
+function cvRisk(whtr) {
+  if (whtr < 0.40) return { label: 'Low', cls: 'low', note: 'Waist-to-height ratio is in the low-risk range.' };
+  if (whtr <= 0.50) return { label: 'Moderate', cls: 'moderate', note: 'Your ratio is within the acceptable range. Maintain current habits.' };
+  if (whtr <= 0.60) return { label: 'High', cls: 'high', note: 'Elevated central adiposity. Consider reducing visceral fat through diet and aerobic activity.' };
   return { label: 'Very High', cls: 'very-high', note: 'Significantly elevated cardiovascular risk. Consultation with a healthcare provider is recommended.' };
 }
 
@@ -412,10 +414,10 @@ function calculate() {
   const cvCard = document.getElementById('cv-risk-card');
   const bodyTypeCard = document.getElementById('body-type-card');
   if (d.waistCm) {
-    const whr = d.waistCm / d.heightCm;
-    const cv  = cvRisk(whr);
+    const whtr = d.waistCm / d.heightCm;   // waist-to-height ratio
+    const cv   = cvRisk(whtr);
     cvCard.style.display = '';
-    document.getElementById('whr-val').textContent = whr.toFixed(3);
+    document.getElementById('whr-val').textContent = whtr.toFixed(3);
     document.getElementById('cv-badge-wrap').innerHTML = `<span class="cv-risk-badge ${cv.cls}">${cv.label}</span>`;
     document.getElementById('cv-note').textContent = cv.note;
 
@@ -492,6 +494,6 @@ document.querySelectorAll('input[name="diet"]').forEach(radio => {
     const d = getInputs();
     if (validate(d)) return;
     const bmr = calcBMR(d.weightKg, d.heightCm, d.age, d.sex);
-    renderMacros(macros(bmr, d.weightKg, d.activityLevel, d.diet));
+    renderMacros(macros(bmr, d.weightKg, d.activityLevel, d.diet, d.heightCm, d.sex));
   });
 });
