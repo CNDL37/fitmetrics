@@ -7,7 +7,11 @@ FitMetrics is a free, open-source health calculator built on peer-reviewed clini
 
 We don't sell supplements, coaching programs, or meal plans. The goal is simply to put clinically validated numbers in your hands in a form that's easy to understand and act on.
 
+FitMetrics is owned and operated by Chicken Nugget Dream Land, LLC — a veteran-owned, healthcare professional-powered company.
+
 ---
+
+<a id="body-fat"></a>
 
 ## Body Fat Percentage — U.S. Navy Circumference Method
 
@@ -71,9 +75,11 @@ FitMetrics uses the **American Council on Exercise (ACE)** body fat classificati
 
 These thresholds reflect population norms and general health risk associations rather than absolute clinical cutoffs. "Essential fat" represents the minimum required for physiological function (organ protection, hormone production, nerve insulation). "Athletic" reflects the range typical of competitive athletes. Health risks associated with excess body fat include insulin resistance, dyslipidemia, cardiovascular disease, and certain cancers — independent of BMI.
 
-<div class="evidence-box"><strong>Note:</strong> The Navy method requires waist and neck circumference for men, and waist, neck, and hip circumference for women. If these optional measurements are not entered in the calculator, the body fat card will not appear. Hip circumference is only shown in the input form when Female is selected as biological sex.</div>
+<div class="evidence-box"><strong>Note:</strong> The Navy method requires waist and neck circumference for men, and waist, neck, and hip circumference for women. If these optional measurements are not entered, the body fat card will not appear. Hip circumference is shown in the input form for all users once a biological sex is selected — it is required for the female body fat formula and is also used for body type classification (WHR) in both sexes.</div>
 
 ---
+
+<a id="bmi"></a>
 
 ## Body Mass Index (BMI)
 
@@ -84,6 +90,8 @@ BMI is calculated as weight (kg) ÷ height (m)². It is a population-level scree
 **Thresholds used:** WHO/NIH standard categories (underweight <18.5, normal 18.5–24.9, overweight 25–29.9, obese ≥30).
 
 ---
+
+<a id="bmr"></a>
 
 ## Basal Metabolic Rate (BMR)
 
@@ -100,6 +108,8 @@ BMR is the number of calories your body burns at complete rest — the minimum e
 
 ---
 
+<a id="cv-risk"></a>
+
 ## Waist-to-Height Ratio & Cardiovascular Risk
 
 Waist circumference divided by height is a simple, powerful predictor of cardiometabolic risk. Unlike BMI, it directly reflects central (visceral) adiposity, the fat depot most strongly linked to insulin resistance, dyslipidemia, hypertension, and cardiovascular disease.
@@ -115,6 +125,49 @@ Waist circumference divided by height is a simple, powerful predictor of cardiom
 **Sex note:** The calculator uses a unified boundary scale because WHtR thresholds show less sex-based variation than absolute waist circumference thresholds, making the 0.5 boundary broadly applicable. Clinically, women may have slightly more leniency at a given WHtR due to differences in fat distribution patterns.
 
 ---
+
+<a id="body-type"></a>
+
+## IFM Body Composition Classification
+
+The IFM (Institute for Functional Medicine) Body Composition Flow Diagram is a clinical decision tree that classifies body composition into distinct phenotypes using a sequential analysis of BMI, waist circumference, waist-to-hip ratio (WHR), and body fat percentage. Unlike BMI alone, it captures both the amount and distribution of adiposity.
+
+### The Classification Process
+
+The flow diagram evaluates four inputs in sequence:
+
+1. **BMI** — Is it elevated (≥25)?
+2. **Waist circumference** — Is central adiposity elevated? (Men ≥94 cm / 37 in; Women ≥80 cm / 31.5 in)
+3. **Waist-to-hip ratio (WHR)** — Does fat distribution skew android (central/abdominal)? (Men >0.90; Women >0.85)
+4. **Body fat percentage** — Is total fat mass elevated? (Men ≥25%; Women ≥32%)
+
+<div class="evidence-box"><strong>Note on WHR vs. WHtR:</strong> Waist-to-hip ratio (WHR = waist ÷ hip) is distinct from waist-to-height ratio (WHtR = waist ÷ height). WHtR predicts cardiovascular risk on a continuous scale. WHR identifies fat distribution pattern (android vs. gynoid) for body type classification. FitMetrics calculates both and uses each for its respective purpose.</div>
+
+### Body Composition Phenotypes
+
+| Type | Pattern | Key Risk |
+|------|---------|---------|
+| **Android Obesity** | High BMI + elevated waist + android fat distribution | Highest metabolic and CV risk; visceral fat drives insulin resistance |
+| **Gynoid Obesity** | High BMI + elevated waist + gynoid distribution | Lower CV risk than android; elevated musculoskeletal load |
+| **Skinny Fat** | Normal BMI + elevated waist | Metabolically obese despite normal weight; often missed by BMI screening |
+| **Metabolically Obese** | High BMI + elevated waist + high BF% | Significant fat mass; metabolic risk without android distribution |
+| **Large Frame** | High BMI + elevated waist + normal WHR + normal BF% | Structurally larger build; BMI overestimates risk |
+| **Athlete / Lean** | Normal or high BMI + normal waist + low-normal BF% | Favorable body composition; BMI may overestimate risk due to muscle mass |
+| **Ideal** | Normal BMI + normal waist | Lowest risk category |
+
+### Why This Matters
+
+BMI alone misclassifies a significant proportion of the population. A muscular person with low body fat may be flagged as "overweight" by BMI while carrying minimal metabolic risk. Conversely, a "normal weight" individual with abdominal adiposity — the skinny fat phenotype — may carry substantial insulin resistance risk that BMI entirely misses.
+
+<div class="evidence-box"><strong>Clinical basis:</strong> The IFM Body Composition Flow Diagram is part of the IFM Cardiometabolic Advanced Practice Module. Waist circumference thresholds follow International Diabetes Federation (IDF) criteria; WHR thresholds follow WHO guidelines; body fat thresholds are consistent with the American Council on Exercise (ACE) classification system used throughout this calculator.</div>
+
+### What FitMetrics Shows
+
+The Body Composition Type card appears when waist circumference is entered. Adding hip circumference (for WHR) and neck circumference (for body fat %) progressively refines the classification. With all measurements present, the full IFM flow diagram is applied.
+
+---
+
+<a id="protein"></a>
 
 ## Protein Intake Recommendations
 
@@ -214,6 +267,8 @@ The 10,000 steps target originated from a 1965 Japanese marketing campaign for a
 **Calorie burn estimate:** Uses MET (metabolic equivalent of task) of 3.5 for brisk walking (reduced to 3.2 for adults over 60), multiplied by body weight and estimated walking duration (~100 steps/minute). This is an approximation; actual burn varies by stride length, terrain, and fitness level.
 
 ---
+
+<a id="heart-rate"></a>
 
 ## Heart Rate Zones
 

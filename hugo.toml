@@ -19,6 +19,10 @@ title = "FitMetrics"
     name = "Blog"
     url = "/blog/"
     weight = 3
+  [[menu.main]]
+    name = "Privacy"
+    url = "/privacy/"
+    weight = 4
 
 [markup]
   [markup.goldmark]
