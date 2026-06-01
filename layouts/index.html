@@ -279,6 +279,73 @@
   </div>
 </div>
 
+<section class="calc-explainer">
+  <style>
+    .calc-explainer {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 8px 20px 72px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .calc-explainer h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 40px 0 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .calc-explainer h3 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 26px 0 6px;
+    }
+    .calc-explainer p { color: var(--muted); margin: 0 0 14px; }
+    .calc-explainer ul { color: var(--muted); margin: 0 0 16px; padding-left: 20px; }
+    .calc-explainer li { margin-bottom: 8px; }
+    .calc-explainer a { color: var(--accent); text-decoration: none; }
+    .calc-explainer a:hover { text-decoration: underline; }
+    .calc-explainer strong { color: var(--text); }
+    .calc-explainer .lead { font-size: 1.05rem; color: var(--text); }
+    .calc-explainer hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+  </style>
+
+  <h2>How This Calculator Works</h2>
+  <p class="lead">FitMetrics turns a handful of simple measurements into a complete picture of your metabolic health — body composition, calorie needs, macronutrient targets, heart rate zones, and a realistic weight-loss projection. Everything is calculated instantly in your browser using published, peer-reviewed formulas. Nothing you type is ever uploaded, stored, or shared.</p>
+
+  <h3>What you enter</h3>
+  <p>At minimum, the calculator needs your age, biological sex, height, and weight. Adding three tape measurements — waist, neck, and (for women) hip circumference — unlocks body fat percentage and body composition typing. The more measurements you provide, the more of the results cards appear. You can work in imperial (lbs/inches) or metric (kg/cm); the toggle at the top converts everything for you.</p>
+
+  <h3>What it calculates</h3>
+  <ul>
+    <li><strong>Body Mass Index (BMI)</strong> — your weight relative to height, using the standard WHO categories. A fast screen, but it can't tell muscle from fat, which is why we pair it with the measures below.</li>
+    <li><strong>Basal Metabolic Rate (BMR)</strong> — the calories your body burns at complete rest, via the Mifflin-St Jeor equation, the most accurate predictive formula for modern populations.</li>
+    <li><strong>Body Fat Percentage</strong> — estimated from your circumference measurements using the U.S. Navy method, a tape-measure technique validated against clinical reference methods to within about ±3–4%.</li>
+    <li><strong>Waist-to-Height Ratio (WHtR)</strong> — a strong, simple predictor of cardiometabolic risk that captures central (belly) fat directly. The rule of thumb: keep your waist under half your height.</li>
+    <li><strong>Body Composition Type</strong> — classifies your build using the Institute for Functional Medicine flow diagram, combining BMI, waist size, waist-to-hip ratio, and body fat into a single phenotype.</li>
+    <li><strong>Protein &amp; Macronutrient Targets</strong> — daily protein scaled to your activity and age, plus fat and carbohydrate splits for balanced, low-carb, keto, and other dietary approaches.</li>
+    <li><strong>Heart Rate Zones</strong> — sex-specific maximum heart rate (Tanaka for men, Gulati for women) and your Zone 2 fat-burning range, rather than the dated and imprecise "220 − age" rule.</li>
+    <li><strong>Weight-Loss Projection</strong> — a 52-week curve that recalculates your BMR each week as you lose weight, showing the natural plateau that every real diet produces instead of an unrealistic straight line.</li>
+  </ul>
+
+  <h3>How to read your results</h3>
+  <p>These numbers are <strong>estimates based on population-level research</strong>, not clinical measurements — they're built for self-monitoring and for spotting trends over time, not for diagnosis. Measurement technique matters most: take your circumference readings snug but not compressing, at the same point each time, and recheck monthly under the same conditions. Where the calculator shows a calorie deficit, note the minimum floors (about 1,200 kcal/day for women and 1,500 kcal/day for men) below which it isn't safe to eat without medical supervision.</p>
+
+  <h3>The evidence behind every number</h3>
+  <p>Every formula and threshold on this page has a published source. The <a href="/about/">About page</a> documents each one in detail — the equations, the studies that validated them, and their known limitations — and our <a href="/blog/">blog</a> goes deeper on topics like <a href="/blog/how-to-interpret-whtr/">interpreting your waist-to-height ratio</a>, <a href="/blog/why-zone-2-matters/">why Zone 2 training matters</a>, and <a href="/blog/how-to-measure-body-circumference/">how to measure your body circumference accurately</a>.</p>
+
+  <hr>
+
+  <p style="font-size:0.85rem;"><em>FitMetrics is not a medical device and does not provide medical advice. All calculations are estimates and may not reflect individual variation. Consult a qualified healthcare provider before making significant changes to your diet or exercise program.</em></p>
+</section>
+
 </div><!-- /.calc-page-wrap -->
 {{ end }}
 

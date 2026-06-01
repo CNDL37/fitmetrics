@@ -159,6 +159,37 @@
 }
 .fm-read-more:hover { text-decoration: underline; }
 
+/* Blog byline + author box */
+.fm-byline-author {
+  display: block;
+  font-weight: 600;
+  color: var(--fm-text);
+  font-size: 0.95rem;
+}
+.fm-byline-meta {
+  display: block;
+  color: var(--fm-muted);
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+.fm-author-box {
+  border-top: 1px solid var(--fm-border);
+  background: var(--fm-surface);
+  border-radius: 12px;
+  padding: 20px 22px;
+  border: 1px solid var(--fm-border);
+}
+.fm-author-box-name {
+  font-weight: 700;
+  color: var(--fm-text);
+  margin-bottom: 6px;
+}
+.fm-author-box-bio {
+  color: var(--fm-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
 /* Calculator page wrapper — remove default padding so calc fills width */
 .calc-page-wrap {
   padding: 0;

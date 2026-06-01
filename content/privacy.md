@@ -48,6 +48,6 @@ We may update this policy from time to time. The effective date at the top of th
 
 ## Contact
 
-For questions about this privacy policy, contact: **privacy@fitmetrics.net**
+For questions about this privacy policy, contact: **chickennuggetdreamland37@gmail.com**
 
 *FitMetrics is owned and operated by Chicken Nugget Dream Land, LLC.*

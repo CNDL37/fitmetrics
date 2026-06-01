@@ -7,7 +7,7 @@ FitMetrics is a free, open-source health calculator built on peer-reviewed clini
 
 We don't sell supplements, coaching programs, or meal plans. The goal is simply to put clinically validated numbers in your hands in a form that's easy to understand and act on.
 
-FitMetrics is owned and operated by Chicken Nugget Dream Land, LLC — a veteran-owned, healthcare professional-powered company.
+FitMetrics is owned and operated by Chicken Nugget Dream Land, LLC — a veteran-owned, healthcare professional-powered company. The site's calculators and articles are written and reviewed by **Matt Wick, MD**, who earned his medical degree from the University of Pittsburgh, is board certified in family medicine, and completed the Institute for Functional Medicine's Applying Functional Medicine in Clinical Practice (AFMCP) program.
 
 ---
 
