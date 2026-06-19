@@ -2,6 +2,11 @@ baseURL = "https://fitmetrics.net/"
 languageCode = "en-us"
 title = "FitMetrics"
 
+# Don't generate thin auto taxonomy/term list pages (they were orphan pages with
+# no original content — a "thin content" signal for AdSense). Re-enable later if
+# tag hubs get real intro content.
+disableKinds = ["taxonomy", "term"]
+
 [params]
   description = "Evidence-based health and fitness calculators — BMR, macros, heart rate zones, and more."
   author = "Matt Wick, MD"

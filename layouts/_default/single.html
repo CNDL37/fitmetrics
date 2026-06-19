@@ -6,12 +6,14 @@
       {{ with .Params.subtitle }}<p class="fm-page-subtitle mb-4">{{ . }}</p>{{ end }}
 
       {{ if eq .Section "blog" }}
-      <div class="fm-byline d-flex align-items-center mb-4">
-        <div>
-          <span class="fm-byline-author">By {{ .Site.Params.author }}</span>
-          <span class="fm-byline-meta">
-            {{ with .Site.Params.authorCredential }}{{ . }} · {{ end }}{{ .Date.Format "January 2, 2006" }}
-          </span>
+      <div class="fm-byline mb-4">
+        <span class="fm-byline-author">By {{ .Site.Params.author }}</span>
+        <span class="fm-byline-meta">
+          {{ with .Site.Params.authorCredential }}{{ . }} · {{ end }}{{ .Date.Format "January 2, 2006" }}{{ if and .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }} · Updated {{ .Lastmod.Format "January 2, 2006" }}{{ end }}
+        </span>
+        <div class="fm-byline-reviewed mt-1 small text-muted">
+          <i class="bi bi-patch-check-fill"></i> Written and medically reviewed by a board-certified physician ·
+          <a href="/editorial-policy/">How we review content</a>
         </div>
       </div>
       {{ end }}
@@ -23,8 +25,9 @@
 
       {{ if eq .Section "blog" }}
       <div class="fm-author-box mt-5">
-        <div class="fm-author-box-name">{{ .Site.Params.author }}</div>
+        <div class="fm-author-box-name">{{ .Site.Params.author }}{{ with .Site.Params.authorCredential }} · {{ . }}{{ end }}</div>
         <p class="fm-author-box-bio mb-0">{{ .Site.Params.authorBio }}</p>
+        <p class="fm-author-box-bio mb-0 mt-2"><a href="/about/">More about FitMetrics &amp; our methodology →</a></p>
       </div>
       {{ end }}
     </div>
