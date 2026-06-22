@@ -18,7 +18,13 @@ We do not create accounts, store user data, or collect any personally identifiab
 
 ## Cookies and Advertising
 
-FitMetrics uses **Google AdSense** to display advertisements. Google AdSense uses cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising by visiting [Google's Ads Settings](https://adssettings.google.com).
+FitMetrics uses **Google AdSense** to display advertisements.
+
+- Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this and other websites.
+- Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the internet.
+- You may opt out of personalized advertising by visiting [Google's Ads Settings](https://adssettings.google.com), or opt out of a third-party vendor's use of cookies for personalized advertising by visiting [aboutads.info](https://www.aboutads.info/choices/).
+
+For more information on how Google uses data when you use our partners' sites or apps, see [How Google uses data](https://policies.google.com/technologies/partner-sites).
 
 ---
 
