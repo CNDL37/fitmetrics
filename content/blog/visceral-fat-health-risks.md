@@ -4,7 +4,7 @@ date: 2026-06-24
 lastmod: 2026-06-24
 subtitle: "Your belly fat isn't all the same."
 summary: "Why Visceral Fat Is More Dangerous Than Belly Fat — evidence-based guide."
-tags: []
+tags: ["body-composition", "metabolism", "visceral-fat"]
 ---
 Your belly fat isn't all the same. The fat you can grab with your fingers—the pinchable stuff under your skin—is called subcutaneous fat. The fat you can't see or feel, wrapped around your liver, pancreas, and intestines, is visceral fat. And it's the visceral stuff that matters more for your health.
 
