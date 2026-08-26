@@ -17,7 +17,7 @@ Waist circumference alone is informative, but it doesn't account for body frame.
 
 **How to calculate it:** waist circumference ÷ height, in the same units.
 
-WHtR is fundamentally a measure of **central (abdominal) fat relative to your frame.** Because abdominal fat — especially the [visceral fat](/blog/visceral-fat-the-hidden-health-risk/) packed around your organs — is the metabolically dangerous kind, WHtR is a strong, simple proxy for cardiometabolic risk.
+WHtR is fundamentally a measure of **central (abdominal) fat relative to your frame.** Because abdominal fat — especially the [visceral fat](/blog/visceral-fat-health-risks/) packed around your organs — is the metabolically dangerous kind, WHtR is a strong, simple proxy for cardiometabolic risk.
 
 Its great strength is a memorable rule of thumb: **keep your waist to less than half your height.** A WHtR under 0.5 is the general target. Risk rises as the ratio climbs:
 

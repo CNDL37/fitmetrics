@@ -13,7 +13,7 @@ If you've ever felt like you exercise regularly but your fitness seems to platea
 
 Norwegian exercise physiologist Stephen Seiler spent years analyzing the training logs of elite endurance athletes — Olympic rowers, cyclists, cross-country skiers, distance runners. The pattern that emerged across sports and nationalities was consistent: roughly **80% of their training was done at low intensity** (Zone 1–2), and only about 20% at high intensity (Zones 4–5).
 
-The athletes weren't doing this because easy training felt better. They were doing it because it worked.
+The athletes weren't doing this because easy training felt better. They were doing it because it worked — and the fitness it builds, measured as [VO₂ max, is one of the strongest predictors of lifespan](/blog/cardiorespiratory-fitness-and-longevity/) we have.
 
 ## What Zone 2 Actually Is
 

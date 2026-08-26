@@ -64,6 +64,8 @@ This phenotypic classification guides intervention. The dietary and exercise app
 
 **Consumer bioelectrical impedance (BIA) scales** measure electrical resistance through the body and estimate fat from an assumed hydration model. They're convenient but highly sensitive to hydration status, food intake, and time of day — making them unreliable for tracking changes over time.
 
+For a fuller side-by-side breakdown of what each approach costs in accuracy, see our guide to [body fat measurement methods compared](/blog/body-fat-measurement-methods-compared/).
+
 ## Using Both Together
 
 BMI and body composition aren't competing measurements — they're complementary. BMI performs reasonably well at extremes (a BMI of 40 almost always reflects excess fat mass; a BMI of 17 almost always reflects underweight). But in the middle range — where most people sit — body composition context is essential.

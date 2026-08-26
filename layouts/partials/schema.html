@@ -1,0 +1,51 @@
+{{- /* Structured data. Health content is YMYL, so the author's medical
+       credentials need to be machine-readable, not just visible in the byline. */ -}}
+
+{{- $author := dict
+  "@type" "Person"
+  "name" .Site.Params.author
+  "jobTitle" .Site.Params.authorCredential
+  "description" .Site.Params.authorBio
+  "url" (absURL "/about/")
+-}}
+
+{{- $publisher := dict
+  "@type" "Organization"
+  "name" "FitMetrics"
+  "url" .Site.BaseURL
+-}}
+
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $desc := cond (isset .Params "summary") .Params.summary .Site.Params.description -}}
+  {{- $schema := dict
+    "@context" "https://schema.org"
+    "@type" (slice "BlogPosting" "MedicalWebPage")
+    "headline" .Title
+    "description" $desc
+    "url" .Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "datePublished" (.Date.Format "2006-01-02")
+    "dateModified" (.Lastmod.Format "2006-01-02")
+    "lastReviewed" (.Lastmod.Format "2006-01-02")
+    "author" $author
+    "reviewedBy" $author
+    "publisher" $publisher
+    "inLanguage" "en-US"
+    "keywords" (delimit .Params.tags ", ")
+    "isAccessibleForFree" true
+  -}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $site := dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "name" "FitMetrics"
+    "url" .Site.BaseURL
+    "description" .Site.Params.description
+    "inLanguage" "en-US"
+    "publisher" $publisher
+  -}}
+<script type="application/ld+json">{{ $site | jsonify | safeJS }}</script>
+{{- end -}}

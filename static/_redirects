@@ -2,6 +2,11 @@
 # hugo.toml). Cloudflare Pages was serving the homepage for those URLs (a soft
 # 404 / duplicate content). Redirect any lingering taxonomy URLs to the blog
 # index so Google drops them cleanly and link signal consolidates.
+# Merged the two overlapping visceral-fat articles into one canonical page
+# (they were competing for the same queries). Consolidate link signal.
+/blog/visceral-fat-the-hidden-health-risk/  /blog/visceral-fat-health-risks/  301
+/blog/visceral-fat-the-hidden-health-risk   /blog/visceral-fat-health-risks/  301
+
 /tags/*        /blog/   301
 /tags          /blog/   301
 /categories/*  /blog/   301

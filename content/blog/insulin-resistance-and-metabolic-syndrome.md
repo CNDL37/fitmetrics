@@ -63,6 +63,8 @@ These levers overlap heavily with general cardiometabolic health — which is pr
 
 Insulin resistance is the slow-building engine behind much of modern chronic disease, and it can advance for years while standard blood sugar tests look fine. Metabolic syndrome is its visible footprint — a cluster of waist size, blood pressure, triglycerides, HDL, and glucose findings. Watching your waistline, staying active, building muscle, eating whole foods, and sleeping well are not just generic wellness advice; they are the specific, evidence-based ways to keep insulin working the way it should.
 
+For a structured way of thinking about the upstream drivers behind these findings, see our overview of [the IFM cardiometabolic framework](/blog/ifm-cardiometabolic-framework/).
+
 ## References
 
 - American Heart Association / National Heart, Lung, and Blood Institute. Diagnostic criteria for metabolic syndrome (harmonized definition).
