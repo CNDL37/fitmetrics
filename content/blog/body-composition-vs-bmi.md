@@ -2,7 +2,7 @@
 title: "Body Composition vs. BMI: Why the Number on the Scale Isn't the Whole Story"
 date: 2026-05-05
 summary: "BMI has been the default measure of body weight status for decades — but it was never designed to assess individual health. Here's what body composition actually tells you, and why it matters more."
-tags: ["body composition", "metabolism", "fitness"]
+tags: ["body-composition", "metabolism", "fitness"]
 ---
 
 BMI — body mass index — divides your weight by the square of your height and places you in one of four categories: underweight, normal, overweight, or obese. It's used by insurance companies, public health agencies, and doctors worldwide as the default measure of whether someone's weight is appropriate for their height.

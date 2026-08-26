@@ -2,7 +2,7 @@
 title: "How to Measure Your Body Circumference — Methods, Tools, and Exactly Where to Measure"
 date: 2026-05-11
 summary: "Accurate circumference measurements are the foundation of body fat estimation, waist-to-height ratio, and body composition classification. Here's where to measure, how to measure, and what tools to use."
-tags: ["body composition", "how-to", "measurement"]
+tags: ["body-composition", "how-to", "measurement"]
 ---
 
 The FitMetrics calculator uses three circumference measurements — waist, hip, and neck — to estimate body fat percentage using the U.S. Navy method and to classify body composition using the IFM flow diagram. The formulas are only as good as the measurements you put into them.

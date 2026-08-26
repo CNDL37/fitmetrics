@@ -41,7 +41,7 @@ The rule of thumb popularized by researchers is simple: *keep your waist to less
 
 WHtR works better across different heights and body types than waist circumference alone, though circumference on its own is still informative — roughly 40 inches (102 cm) for men and 35 inches (88 cm) for women mark elevated risk, with lower thresholds for some populations. Waist-to-hip ratio captures fat distribution, the classic "apple versus pear" shape, and complements WHtR rather than replacing it.
 
-Want to check yours right now? Use the [waist-to-height ratio calculator](/#cv-risk) and see where you land. For more depth, see our guides to [interpreting your waist-to-height ratio](/blog/how-to-interpret-whtr/), [measuring body circumference correctly](/blog/how-to-measure-body-circumference/), and [choosing between waist-to-hip and waist-to-height](/blog/waist-to-hip-vs-waist-to-height/).
+Want to check yours right now? Use the [waist-to-height ratio calculator](/) and see where you land. For more depth, see our guides to [interpreting your waist-to-height ratio](/blog/how-to-interpret-whtr/), [measuring body circumference correctly](/blog/how-to-measure-body-circumference/), and [choosing between waist-to-hip and waist-to-height](/blog/waist-to-hip-vs-waist-to-height/).
 
 ## Can you be thin and still have dangerous visceral fat?
 
@@ -66,7 +66,7 @@ Several factors contribute, and they tend to cluster together:
 
 Here's the encouraging part: visceral fat is often the *first* fat to respond when you change your habits. It is metabolically mobile, so it tends to go early rather than last.
 
-**Create a moderate calorie deficit.** You cannot spot-reduce belly fat with crunches, but an overall energy deficit preferentially trims visceral stores. Aim for one to two pounds per week. Don't overdo it — severe restriction raises cortisol, which works against you. Use the [BMR and TDEE calculator](/#bmr) to find a sensible target, and see our [guide to BMR versus TDEE](/blog/bmr-vs-tdee-understanding-calorie-needs/) for how the numbers fit together.
+**Create a moderate calorie deficit.** You cannot spot-reduce belly fat with crunches, but an overall energy deficit preferentially trims visceral stores. Aim for one to two pounds per week. Don't overdo it — severe restriction raises cortisol, which works against you. Use the [BMR and TDEE calculator](/) to find a sensible target, and see our [guide to BMR versus TDEE](/blog/bmr-vs-tdee-understanding-calorie-needs/) for how the numbers fit together.
 
 **Prioritize protein and fiber.** Protein preserves muscle during weight loss and keeps you full; roughly 0.7 to 1.0 grams per pound of body weight is a reasonable target, and [how you distribute it across meals](/blog/how-much-protein-per-meal/) matters too. [Soluble fiber](/blog/fiber-the-forgotten-nutrient/) from oats, beans, apples, and vegetables is independently associated with lower visceral fat.
 
@@ -90,7 +90,7 @@ You won't see change overnight, but visceral fat is responsive. The tape measure
 
 The number on your scale tells you almost nothing about the fat that matters most. Visceral fat is metabolically dangerous tissue surrounding your organs, and it can be elevated even when your weight looks fine. A tape measure and your waist-to-height ratio give you a far better read on cardiometabolic risk than weight alone — and they cost nothing.
 
-Check your ratio with the [waist-to-height ratio calculator](/#cv-risk). If you're above 0.5, start with one small change: swap a sugary drink for water, take a 15-minute walk, or add a serving of vegetables to dinner. Track the ratio over time, and you'll be watching the number that actually moves the needle.
+Check your ratio with the [waist-to-height ratio calculator](/). If you're above 0.5, start with one small change: swap a sugary drink for water, take a 15-minute walk, or add a serving of vegetables to dinner. Track the ratio over time, and you'll be watching the number that actually moves the needle.
 
 ## References
 
