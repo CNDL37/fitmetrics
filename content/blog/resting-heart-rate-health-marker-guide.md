@@ -5,8 +5,6 @@ lastmod: 2026-09-13
 subtitle: "A lower resting pulse usually means a stronger heart, but the trend over time matters more than any single reading."
 summary: "Resting heart rate is one of the easiest vital signs to track and one of the most informative. Learn normal ranges by age, what athletes' rates mean, and which habits move your number."
 tags: ["cardio", "measurement", "fitness", "aging"]
-draft: true
-topic: "Resting heart rate as a health marker: normal ranges, trends, and what changes it"
 ---
 
 Resting heart rate (RHR) is the number of times your heart beats per minute while you are awake, calm, and have not recently eaten, exercised, or had caffeine. For most adults, a normal resting heart rate falls between 60 and 100 beats per minute (bpm). That range comes from the American Heart Association and is widely used in clinical practice.
