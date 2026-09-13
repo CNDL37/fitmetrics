@@ -1,0 +1,9 @@
+name = "fitmetrics-content-bot"
+main = "worker.js"
+compatibility_date = "2024-09-01"
+
+[vars]
+GITHUB_REPO = "CNDL37/fitmetrics"
+
+# Secrets — set with `npx wrangler secret put <NAME>` from this folder:
+#   TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_CHAT_ID, GITHUB_TOKEN

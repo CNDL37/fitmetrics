@@ -1,1 +1,10 @@
 public/
+.DS_Store
+*.pdf
+adsense-resubmission-checklist.md
+.env
+.env.*
+.hugo_build.lock
+content-machine/telegram-worker/node_modules/
+content-machine/telegram-worker/.wrangler/
+list.txt

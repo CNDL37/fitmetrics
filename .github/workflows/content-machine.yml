@@ -1,0 +1,146 @@
+name: Content machine
+
+# One workflow, five actions. Triggered by:
+#   • schedule            → draft-next (Mon + Thu 09:00 UTC)
+#   • workflow_dispatch   → run any action by hand from the Actions tab
+#   • repository_dispatch → the Telegram bot (Cloudflare Worker) sends
+#                            {"event_type":"content-machine","client_payload":{action,topic,slug,instruction,provider}}
+#
+# Drafts are written to content/blog/<slug>.md with `draft: true` (Hugo does not build
+# them). "publish" removes the draft flag and then runs the normal Cloudflare deploy.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+    - cron: "0 9 * * 4"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "draft-next | draft | rewrite | publish | decline | add | list"
+        type: choice
+        default: draft-next
+        options: [draft-next, draft, rewrite, publish, decline, add, list]
+      topic:
+        description: "Topic (for draft / add). Notes after ' | '"
+        type: string
+      slug:
+        description: "Post slug (for rewrite / publish / decline)"
+        type: string
+      instruction:
+        description: "Rewrite instruction"
+        type: string
+      provider:
+        description: "LLM provider (deepseek | anthropic)"
+        type: choice
+        default: deepseek
+        options: [deepseek, anthropic]
+  repository_dispatch:
+    types: [content-machine]
+
+concurrency:
+  group: content-machine
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.act.outputs.status }}
+      slug: ${{ steps.act.outputs.slug }}
+    env:
+      ACTION: ${{ github.event.inputs.action || github.event.client_payload.action || 'draft-next' }}
+      TOPIC: ${{ github.event.inputs.topic || github.event.client_payload.topic }}
+      SLUG: ${{ github.event.inputs.slug || github.event.client_payload.slug }}
+      INSTRUCTION: ${{ github.event.inputs.instruction || github.event.client_payload.instruction }}
+      LLM_PROVIDER: ${{ github.event.inputs.provider || github.event.client_payload.provider || vars.LLM_PROVIDER || 'deepseek' }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run action
+        id: act
+        run: |
+          set -euo pipefail
+          echo "Action: $ACTION"
+          case "$ACTION" in
+            draft-next) node content-machine/generate.mjs --next ;;
+            draft)      node content-machine/generate.mjs --topic "$TOPIC" ;;
+            rewrite)    node content-machine/generate.mjs --rewrite "$SLUG" --instruction "$INSTRUCTION" ;;
+            publish)    node content-machine/publish.mjs --publish "$SLUG" ;;
+            decline)    node content-machine/publish.mjs --decline "$SLUG" ;;
+            add)        node content-machine/publish.mjs --add "$TOPIC" ;;
+            list)       node content-machine/publish.mjs --list | tee list.txt ;;
+            *)          echo "Unknown action $ACTION" >&2; exit 2 ;;
+          esac
+
+      - name: Commit and push
+        if: steps.act.outputs.status != 'listed' && steps.act.outputs.status != 'empty'
+        env:
+          # Passed as env, never interpolated into the script body: TITLE comes
+          # from the LLM, and `${{ }}` substitution happens before bash parses,
+          # so a title containing $(...) or backticks would execute here.
+          TITLE: ${{ steps.act.outputs.title }}
+          OUT_SLUG: ${{ steps.act.outputs.slug }}
+          PROVIDER: ${{ steps.act.outputs.provider }}
+        run: |
+          set -euo pipefail
+          git config user.name  "fitmetrics-content-bot"
+          git config user.email "content-bot@fitmetrics.net"
+          git add content/blog content-machine/queue.md
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          case "$ACTION" in
+            publish) msg="content: publish \"$TITLE\"" ;;
+            decline) msg="content: decline draft $OUT_SLUG" ;;
+            add)     msg="queue: add topic" ;;
+            *)       msg="content: draft \"$TITLE\" ($PROVIDER)" ;;
+          esac
+          git commit -m "$msg"
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push attempt $i failed; rebasing on origin/main"
+            git pull --rebase --autostash || true
+            sleep 2
+          done
+          echo "::error::git push failed after 3 attempts — content is committed but not on main"
+          exit 1
+
+      - name: Telegram — draft card
+        if: steps.act.outputs.status == 'drafted'
+        run: node content-machine/notify.mjs --draft-card "${{ steps.act.outputs.slug }}"
+
+      - name: Telegram — status
+        if: always() && steps.act.outputs.status != 'drafted'
+        env:
+          STATUS: ${{ steps.act.outputs.status }}
+          TITLE: ${{ steps.act.outputs.title }}
+          URL: ${{ steps.act.outputs.url }}
+          ERR: ${{ steps.act.outputs.error }}
+          POSITION: ${{ steps.act.outputs.position }}
+          JOB_STATUS: ${{ job.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -uo pipefail
+          # A failed commit/push must not be reported as a successful publish.
+          if [ "${JOB_STATUS:-success}" != "success" ]; then STATUS=error; fi
+          export STATUS
+          if [ "$STATUS" = "listed" ]; then
+            node content-machine/notify.mjs --plain --message "$(cat list.txt)"
+          else
+            node content-machine/notify.mjs --status
+          fi
+
+  deploy:
+    needs: run
+    if: needs.run.outputs.status == 'published'
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
