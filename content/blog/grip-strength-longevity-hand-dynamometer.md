@@ -5,8 +5,6 @@ lastmod: 2026-09-14
 subtitle: "A cheap handgrip test tracks muscle, nerve, and metabolic health — and predicts mortality better than blood pressure."
 summary: "Grip strength measured by a hand dynamometer predicts mortality, disability, and cardiovascular risk better than many standard vital signs. Here is how to test at home and what EWGSOP2 thresholds mean."
 tags: ["aging", "sarcopenia", "measurement", "fitness"]
-draft: true
-topic: "Grip strength and longevity: why a hand dynamometer predicts more than you'd expect"
 ---
 
 Grip strength is the force your hand can produce when squeezing. It is also one of the most quietly powerful numbers in preventive medicine. Across large population studies, a weak grip predicts earlier death, more disability, and higher cardiovascular risk — often more strongly than blood pressure or cholesterol.
