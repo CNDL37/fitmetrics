@@ -5,8 +5,6 @@ lastmod: 2026-09-17
 subtitle: "A two-week weigh-in method that turns your scale into a personal calorie calculator."
 summary: "Maintenance calories are the intake that keeps your weight stable. Learn how to estimate them from a BMR/TDEE formula, then refine that estimate with two weeks of consistent weigh-ins."
 tags: ["tdee", "bmr", "how-to", "measurement"]
-draft: true
-topic: "How to find your maintenance calories without a lab"
 ---
 
 Your maintenance calories are the number of calories you can eat each day while your weight stays roughly the same over time. You do not need a metabolic chamber or an indirect calorimeter to find yours. You need a reasonable starting estimate and about two weeks of consistent weigh-ins.
