@@ -4,7 +4,6 @@ One topic per line, starting with `- `. The top line is drafted next.
 Optional notes for the writer go after ` | `. Edit freely in VS Code, or via Telegram
 (`/add <topic>`, `/queue`). The generator removes a line when it drafts it.
 
-- How to find your maintenance calories without a lab | tie to BMR/TDEE calculator, 2-week weigh-in method
 - Creatine for adults over 40: what the evidence actually supports | muscle, bone, cognition; dosing ranges only, no brands
 - Time-restricted eating: what the trials show for weight and metabolic health | keep balanced, mention who should avoid it
 - Walking for metabolic health: is 10,000 steps the right target? | step-count dose-response studies, cadence
