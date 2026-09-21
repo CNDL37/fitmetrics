@@ -5,8 +5,6 @@ lastmod: 2026-09-21
 subtitle: "Muscle, bone, and cognition benefits are real but uneven — here's what the research shows and who responds."
 summary: "Creatine is one of the most studied supplements in existence. For adults over 40, the evidence is strongest for muscle and strength, mixed for cognition, and weak for bone. Here's how to read it."
 tags: ["aging", "sarcopenia", "body-composition", "how-to"]
-draft: true
-topic: "Creatine for adults over 40: what the evidence actually supports"
 ---
 
 Creatine monohydrate is the most researched ergogenic supplement in sports nutrition, with hundreds of trials behind it. Most of that research was done in young men lifting weights, which leaves a practical question for anyone over 40: does any of it apply to me?
