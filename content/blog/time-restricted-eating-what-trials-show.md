@@ -5,8 +5,6 @@ lastmod: 2026-09-24
 subtitle: "Eating windows of 8 to 10 hours can help, but the trials suggest the clock matters less than the calories."
 summary: "Time-restricted eating limits eating to a daily window, usually 8 to 10 hours. Trials show modest weight loss and mixed metabolic effects, with calories still doing most of the work."
 tags: ["metabolism", "insulin-resistance", "measurement"]
-draft: true
-topic: "Time-restricted eating: what the trials show for weight and metabolic health"
 ---
 
 Time-restricted eating (TRE) means confining all your calories to a set window each day, typically 8 to 10 hours, and fasting the rest. It is the most studied form of intermittent fasting, and the most practical for most people.
