@@ -5,8 +5,6 @@ lastmod: 2026-09-28
 subtitle: "The 10,000-step goal came from a pedometer ad, not a lab. Here is what the dose-response data actually shows."
 summary: "Ten thousand steps is a marketing number, not a clinical threshold. Learn what step-count studies show about mortality, diabetes risk, and walking cadence, and how to set a target that fits your body."
 tags: ["metabolism", "cardio", "measurement", "insulin-resistance"]
-draft: true
-topic: "Walking for metabolic health: is 10,000 steps the right target?"
 ---
 
 Ten thousand steps a day is the most widely repeated number in fitness. It is also not a medical guideline. The figure traces back to a 1960s Japanese pedometer marketed as the *manpo-kei*, or "10,000-step meter," chosen because the character for 10,000 resembles a walking figure and because it was a round, memorable number. No trial established it as the threshold where health benefits begin.
