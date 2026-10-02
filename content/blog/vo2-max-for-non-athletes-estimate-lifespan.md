@@ -1,12 +1,10 @@
 ---
 title: "VO2 Max for Non-Athletes: Estimate It, Track It, Live Longer"
-date: 2026-10-01
-lastmod: 2026-10-01
+date: 2026-10-02
+lastmod: 2026-10-02
 subtitle: "You don't need a lab or a race bib. Here's how to estimate your cardiorespiratory fitness at home."
 summary: "VO2 max is one of the strongest predictors of how long you'll live, and you can estimate it without a lab. Learn the Cooper test, what wearables get right, and how zone 2 training raises your number."
 tags: ["cardio", "fitness", "measurement", "aging"]
-draft: true
-topic: "VO2 max for non-athletes: how to estimate it and why it predicts lifespan"
 ---
 
 VO2 max is the maximum amount of oxygen your body can use during hard exercise, measured in milliliters of oxygen per kilogram of body weight per minute (mL/kg/min). It reflects how well your heart, lungs, blood, and muscles work together to deliver and use oxygen. You do not need to be an athlete for this number to matter.
