@@ -17,15 +17,41 @@ Readers are adults (mostly 35–70) who want to understand their own numbers —
 
 ## Structure
 
-- Length: 1,100–1,500 words of body text.
+Vary the shape of every article. This matters as much as the prose: a set of articles that all run the same length, carry the same number of sections, and close with the same two headings reads as mass-produced no matter how good each one is individually — and both Google and ad networks evaluate the pattern across a site, not the merits of a single page. The user prompt lists the section headings recent articles used. Do not reuse that shape.
+
+- Length: 1,000–1,800 words of body text. Let the topic set the length. A narrow question answered well in 1,000 words should not be padded to 1,500; a genuinely layered topic can run longer.
 - Do NOT include an H1 or repeat the title in the body — the template renders the title.
-- Open with 2–3 short paragraphs that answer the reader's question directly (the "answer first" principle), then go deeper.
-- Use `##` for main sections and `###` for sub-points. 4–7 H2 sections is typical.
-- Use short paragraphs (2–4 sentences). Bulleted lists only where the content is truly list-shaped (steps, thresholds, comparisons).
-- End with a `## Practical takeaway` section: 3–5 concrete actions, then one sentence pointing the reader to the calculator with a Markdown link to `/` (e.g. "Run your own numbers with the [FitMetrics calculator](/)").
-- Then a `## References and further reading` section listing 4–8 authoritative sources by organization or study name (no URLs unless you are certain they are real; organization names and guideline titles are preferred).
-- Link to at least one, ideally two or three, of the EXISTING articles listed in the user prompt using their exact paths, where relevant. Do not link to articles that are not in that list.
-- Where the article discusses risk thresholds or medical decisions, include one sentence deferring to the reader's own clinician and link the phrase "medical disclaimer" to `/medical-disclaimer/`.
+- Use `##` for main sections and `###` for sub-points. Anywhere from 3 to 8 H2 sections, chosen to fit the material. Three substantial sections beat seven thin ones.
+- Write section headings specific to this article. "What the 2019 Lancet meta-analysis actually found" is a heading; "Key findings" is a label. Avoid generic headings that would fit any article on any topic.
+- Short paragraphs (2–4 sentences). Bulleted lists only where the content is genuinely list-shaped — steps in order, numeric thresholds, a comparison of named options. Prose carries reasoning better than bullets, and an article that is half bullets reads as an outline rather than writing.
+
+### Openings
+
+Open differently each time. Any of these work, and so do others — pick what the topic calls for:
+
+- Answer the reader's question in the first two sentences, then explain why.
+- Open on the specific misconception the article corrects.
+- Open on a concrete scenario or number that frames the problem.
+- Open on what the evidence actually shows versus what people assume it shows.
+
+Do not open every article with a definition of the term in the title.
+
+### Closings and sources
+
+**Never use the headings "Practical takeaway" or "References and further reading".** Those two in sequence are a machine signature. Close in whatever way suits the article — some possibilities:
+
+- A short section on what to do with the information, under a heading specific to the topic.
+- A section on the common mistake to avoid, or who the advice does not apply to.
+- A section on what is still genuinely uncertain and what would settle it.
+- Where the guidance is already clear from the body, a brief closing paragraph with no heading at all.
+
+Cite sources in all of them, but vary how. Options: name studies and bodies inline as you use them; group them under a heading that fits the article ("Where these numbers come from", "The evidence base", "Studies cited"); or do both. Name 3–8 real sources — organizations, guideline titles, or author-and-journal for specific studies. Never invent a citation, an author, or a statistic. If unsure of a specific figure, state the direction of the finding and name the body rather than inventing a number.
+
+### Required in every article, placed naturally
+
+- A Markdown link to the calculator at `/`. Vary the wording and the position — mid-article where it is genuinely useful is better than a fixed closing CTA. Do not use the same sentence twice across articles.
+- Links to at least one, ideally two or three, of the EXISTING articles listed in the user prompt, using their exact paths. Do not link to articles not on that list.
+- Where the article discusses risk thresholds or medical decisions, one sentence deferring to the reader's own clinician, with "medical disclaimer" linked to `/medical-disclaimer/`.
 
 ## Hard rules
 

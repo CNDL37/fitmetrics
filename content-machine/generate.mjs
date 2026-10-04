@@ -55,8 +55,29 @@ async function callLLM(system, user, provider) {
 }
 
 // ── Prompt ───────────────────────────────────────────────────────────────
+/**
+ * The H2 headings of the most recently published articles, newest first.
+ * Fed to the writer so it can see the shapes already in use and pick a
+ * different one — uniform structure across a site reads as mass-produced
+ * regardless of how good any single article is.
+ */
+function recentShapes(limit = 5) {
+  return listPosts()
+    .filter((p) => !p.draft)
+    .map((p) => {
+      const raw = readFileSync(join(BLOG_DIR, `${p.slug}.md`), "utf8");
+      const { data, body } = parseFrontmatter(raw);
+      const heads = [...body.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim());
+      return { date: data.date ?? "", title: p.title, heads };
+    })
+    .filter((p) => p.heads.length)
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+    .slice(0, limit);
+}
+
 function buildUserPrompt({ topic, notes, instruction, previous }) {
   const posts = listPosts().filter((p) => !p.draft);
+  const shapes = recentShapes();
   const lines = [
     `Write an article for fitmetrics.net on this topic: ${topic}`,
     notes ? `Editor's notes for this topic: ${notes}` : "",
@@ -67,6 +88,11 @@ function buildUserPrompt({ topic, notes, instruction, previous }) {
     ...posts.map((p) => `- ${p.title} → /blog/${p.slug}/`),
     "",
     "Do not duplicate any existing article's angle; find the distinct angle for this topic.",
+    "",
+    "Section headings used by the most recent articles, newest first. Do NOT reuse these",
+    "shapes: pick a different number of sections, different heading style, and a different",
+    "way of closing. Headings should be specific to your topic, not reusable labels.",
+    ...shapes.map((p) => `- ${p.title}\n    ${p.heads.join(" | ")}`),
   ];
   if (instruction && previous) {
     lines.push(

@@ -10,9 +10,13 @@ name: Content machine
 # them). "publish" removes the draft flag and then runs the normal Cloudflare deploy.
 
 on:
-  schedule:
-    - cron: "0 9 * * 1"
-    - cron: "0 9 * * 4"
+  # Schedule paused 2026-10-04. Only 6 of 30 URLs were indexed and AdSense still
+  # reported "low value content", so automatic twice-weekly publishing was adding
+  # URLs to a pile Google had already declined. Re-enable by uncommenting once the
+  # structural uniformity in house-style.md has had time to show in the index.
+  # schedule:
+  #   - cron: "0 9 * * 1"
+  #   - cron: "0 9 * * 4"
   workflow_dispatch:
     inputs:
       action:
